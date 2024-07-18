@@ -22,7 +22,7 @@
 }
 
 .formLogin .divSignUp {
-    background-color: var(--color_Backgroud2);
+    background-color: var(--color_main2);
     width: 400px;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .p_Label {
-    color: var(--color_Backgroud);
+    color: var(--color_main);
     margin: 0;
     padding: 0;
     height: 40px;
@@ -84,6 +84,6 @@
     border: 0; 
     font-size: var(--font-size_Normal); 
     color: white; 
-    background-color: var(--color_Backgroud); 
+    background-color: var(--color_main); 
     font-weight: 500;
 }

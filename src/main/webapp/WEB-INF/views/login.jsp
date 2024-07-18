@@ -11,18 +11,18 @@
 </head>
 
 <body>
-    <nav style="background-color:rgb(159, 37, 72) ; height: 70px; display: flex;">
-        <div style="width: 80%; margin: auto;">
-            <div class="navMenu">
-                <div style="width: 250px;">
-                    <a href="/index"><img src="/image/Logo/logoXINH.png" alt="Logo" width="120px"></a>
-                </div>
-                <ul class="ulMenu" style="width: 250px;">
-                    <li><a href="/index">Trang chủ</a></li>
-                    <li><a href="/login">Tài khoản</a></li>
-                    <li><a href="#">Giỏ hàng</a></li>
-                </ul>
-            </div>
+    <nav style="background-color: white ; height: 70px; display: flex;">
+        <div style="width: 1200px; margin: auto;" class="navMenu">
+            <a href="/index"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+            <!-- <form action="#" class="formFind">
+                <input type="text" placeholder="Tìm kiếm...">
+                <button type="submit">Tìm kiếm</button>
+            </form> -->
+            <ul class="ulMenu" style="width: 220px;">
+                <li><a href="/index">Trang chủ</a></li>
+                <li><a href="/login">Tài khoản</a></li>
+                <li><a href="#">Giỏ hàng</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -44,8 +44,8 @@
                     </div>
                 </form>
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <p style="font-size: 20px; font-weight: 500; height: 20px; color: var(--color_Backgroud); margin-top: 38px; margin-bottom: 40px;">Đăng kí để nhận nhiều ưu đãi hấp dẫn</p>
-                    <button class="submitBtn" style="border: 1px solid; border-color: var(--color_Backgroud); font-size: var(--font-size_Normal); color: var(--color_Backgroud); background-color: white;">Đăng kí</button>
+                    <p style="font-size: 20px; font-weight: 500; height: 20px; color: var(--color_main); margin-top: 38px; margin-bottom: 40px;">Đăng kí để nhận nhiều ưu đãi hấp dẫn</p>
+                    <button class="submitBtn" style="border: 1px solid; border-color: var(--color_main); font-size: var(--font-size_Normal); color: var(--color_main); background-color: white;">Đăng kí</button>
                 </div>
             </div>
             <div class="divLogin">

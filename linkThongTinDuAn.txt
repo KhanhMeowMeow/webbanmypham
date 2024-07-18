@@ -1,2 +1,3 @@
 Yêu cầu dự án: https://docs.google.com/spreadsheets/d/19ne-e6I4l2SmzdxgtyxObvTleDaxjNGPYC8lrN4n4Tg/edit?usp=sharing
 Thiết kế giao diện: https://www.figma.com/design/TAHYYZ7azORgbX6ZWNliMY/Trang-b%C3%A1n-m%E1%BB%B9-ph%E1%BA%A9m?node-id=0-1&m=dev&t=npY655UX8HTmABmT-1
+Các sơ đồ dự án: https://lucid.app/lucidchart/f15ef5cf-a07b-43dc-b757-163f898eaa39/edit?viewport_loc=-508%2C458%2C1885%2C845%2C0_0&invitationId=inv_945deab1-9330-48e9-af4c-14d6c7239664
