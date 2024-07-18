@@ -1,0 +1,2 @@
+Yêu cầu dự án: https://docs.google.com/spreadsheets/d/19ne-e6I4l2SmzdxgtyxObvTleDaxjNGPYC8lrN4n4Tg/edit?usp=sharing
+Thiết kế giao diện: https://www.figma.com/design/TAHYYZ7azORgbX6ZWNliMY/Trang-b%C3%A1n-m%E1%BB%B9-ph%E1%BA%A9m?node-id=0-1&m=dev&t=npY655UX8HTmABmT-1

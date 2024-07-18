@@ -1,0 +1,89 @@
+@import url('/css/cssindex.css');
+
+.container {
+    display: flex;
+}
+
+.formLogin {
+    height: 490px;
+    width: 1000px;
+    margin: auto;
+    margin-top: 82px;
+    margin-bottom: 82px;
+    background-color: white;
+    display: flex;
+}
+
+.formLogin>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formLogin .divSignUp {
+    background-color: var(--color_Backgroud2);
+    width: 400px;
+}
+
+.formLogin .divSignUp form {
+    display: none;
+}
+
+.formLogin .divLogin {
+    background-color: none;
+    width: 600px;
+}
+
+.p_Label {
+    color: var(--color_Backgroud);
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.form {
+    margin-top: 30px;
+}
+
+.form>div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form input {
+    height: 30px;
+    width: 430px;
+    border: 0px solid;
+    margin: 0;
+    background-color: rgb(247, 247, 247);
+    padding: 10px;
+    font-size: var(--font-size_Normal);
+}
+
+.form input:focus {
+    outline: none;
+}
+
+.form p {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.form label {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.submitBtn {
+    height: 50px; 
+    width: 130px; 
+    border: 0; 
+    font-size: var(--font-size_Normal); 
+    color: white; 
+    background-color: var(--color_Backgroud); 
+    font-weight: 500;
+}

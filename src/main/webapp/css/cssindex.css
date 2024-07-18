@@ -1,0 +1,140 @@
+:root {
+    --color_main: rgb(161, 35, 73);
+    --color_main2: rgb(255, 234, 240);
+    --color_main3: rgb(247, 247, 247);
+    --color_main4: rgb(128, 128, 128);
+    --font-size_Normal: 17px;
+    --font-family: Asap Condensed;
+}
+
+body {
+    background-color: var(--color_main3);
+    margin: 0;
+}
+
+a {
+    font-family: var(--font-family);
+}
+
+label {
+    font-family: var(--font-family);
+}
+
+p {
+    font-family: var(--font-family);
+}
+
+li {
+    font-family: var(--font-family);
+}
+
+button {
+    font-family: var(--font-family);
+}
+
+input {
+    font-family: var(--font-family);
+}
+
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ulMenu {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+}
+
+.ulMenu a {
+    font-family: var(--font-family);
+    font-size: 17px;
+    color: var(--color_main);
+    text-decoration: none;
+}
+
+.ulMenuTextColor a {
+    font-size: var(--font-size_Normal);
+    color: var(--color_main);
+    font-weight: bold;
+}
+
+.formFind input {
+    width: 478px;
+    height: 20px;
+    padding: 5px 5px 5px 15px;
+    color: var(--color_main4);
+    font-size: var(--font-size_Normal);
+    font-family: var(--font-family);
+    border: 1px solid var(--color_main);
+}
+
+.formFind input:focus {
+    outline: none;
+}
+
+.formFind button {
+    width: 100px;
+    height: 31.28px;
+    padding: 0px;
+    background-color: var(--color_main);
+    border: none;
+    color: white;
+    font-family: var(--font-family);
+    font-size: var(--font-size_Normal);
+}
+
+.listProducts {
+    width: 100%;
+}
+
+.listProducts>p {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    color: var(--color_main4);
+    font-size: 25px;
+    height: 29px;
+}
+
+
+.layOutProduct {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    width: 232px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.product>img{
+    width: 204px;
+    height: 204px;
+    margin: 14px 14px 0 14px;
+}
+.inforProduct{
+    margin: 5px 14px 14px 14px;
+}
+.inforProduct > p{
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    height: 300px;
+    background-color: var(--color_main);
+    margin-top: 10px;
+}
