@@ -69,7 +69,6 @@
 
     <footer>
         <div style="display: flex; justify-content: center;">
-            <h1 style="color: white;">${messCC}</h1>
         </div>
     </footer>
 </body>

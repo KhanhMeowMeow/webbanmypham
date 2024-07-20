@@ -1,14 +1,27 @@
 package source.DAO;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
-import source.model.nguoiDung;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import source.model.NguoiDung;
+import source.repository.NguoiDungRepository;
 
 @Service
-public interface nguoiDungDAO extends JpaRepository<nguoiDung, String>{
-    nguoiDung findByIdNguoiDung(String idNguoiDung);
+public class NguoiDungDao {
+    @Autowired
+    private NguoiDungRepository nguoiDungRepository;
+
+    public NguoiDung themNguoiDung(NguoiDung nguoiDung){
+        return nguoiDungRepository.save(nguoiDung);
+    }
+
+    public NguoiDung timTheoTenNgoiDung(String MaNguoiDung){
+        return nguoiDungRepository.findById(MaNguoiDung).orElse(null);
+    }
+
+    public List<NguoiDung> timTatCaNgoiDung(){
+        return nguoiDungRepository.findAll();
+    }
 }

@@ -1,8 +1,6 @@
 package source.model;
 
 import java.util.Set;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -19,21 +17,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "NguoiDung")
-public class NguoiDung {
+@Table(name = "GioHang")
+public class GioHang {
     @Id
-    private String MaNguoiDung;
-    private String TenNguoiDung;
-    private String MatKhau;
-    private boolean vaiTro;
-    private String DiaChi;
-    private String SoDienThoai;
-    private String Email;
+    private String MaGioHang;
+    
+    @OneToOne
+    @JoinColumn(name = "NguoiDung", referencedColumnName = "MaNguoiDung")
+    private NguoiDung NguoiDung;
+    
+    private int SoLuongSanPham;
+    private double TongTien;
 
-    @OneToOne(mappedBy = "NguoiDung")
-    private GioHang GioHang;
-
-    @OneToMany(mappedBy = "NguoiDung")
-    private Set<DonHang> DonHangs;
-
+    @OneToMany(mappedBy = "GioHang")
+    private Set<GioHangChiTiet> GioHangChiTiets;
 }

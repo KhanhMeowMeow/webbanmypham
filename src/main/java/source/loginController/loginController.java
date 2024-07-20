@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import source.DAO.nguoiDungDAO;
-import source.model.nguoiDung;
+import source.DAO.NguoiDungDao;
+import source.model.NguoiDung;
+
 
 
 
@@ -20,21 +21,23 @@ import source.model.nguoiDung;
 public class loginController {
 
     @Autowired
-    nguoiDungDAO ndDAO;
+    private NguoiDungDao nguoiDungDao;
+    
 
     @GetMapping("/login")
-    public String getLogin(@ModelAttribute("nguoiDung") nguoiDung nguoiDung) {
+    public String getLogin(@ModelAttribute("nguoiDung") NguoiDung nguoiDung) {
         return "login";
     }
 
     @RequestMapping("/submitLogin")
     public String submitLogin(@RequestParam("idNguoiDung") String idNguoiDung,
-                            @RequestParam("matKhau") String matKhau, Model model) {
-        List<nguoiDung> nguoiDungs = ndDAO.findAll();
-        nguoiDung existingUser = null;
-        for (nguoiDung nguoiDung : nguoiDungs) {
+                            @RequestParam("matKhau") String matKhau, 
+                            Model model) {
+        List<NguoiDung> nguoiDungs = nguoiDungDao.timTatCaNgoiDung();
+        NguoiDung existingUser = null;
+        for (NguoiDung nguoiDung : nguoiDungs) {
             model.addAttribute("messCC", listNguoiDungString(nguoiDungs));
-            if (idNguoiDung.equals(nguoiDung.getIdNguoiDung())) {
+            if (idNguoiDung.equals(nguoiDung.getMaNguoiDung())) {
                 existingUser = nguoiDung;
             }
         }
@@ -50,10 +53,10 @@ public class loginController {
         }
     }
 
-    private String listNguoiDungString(List<nguoiDung> listNguoiDungs){
+    private String listNguoiDungString(List<NguoiDung> listNguoiDungs){
         String listNguoiDung = "";
-        for (nguoiDung nguoiDung : listNguoiDungs) {
-            listNguoiDung += nguoiDung.getIdNguoiDung() + ", ";
+        for (NguoiDung nguoiDung : listNguoiDungs) {
+            listNguoiDung += nguoiDung.getTenNguoiDung() + ", ";
         }
         return listNguoiDung;
     }
