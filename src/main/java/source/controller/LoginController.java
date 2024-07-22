@@ -1,4 +1,4 @@
-package source.loginController;
+package source.controller;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import source.model.NguoiDung;
 
 
 @Controller
-public class loginController {
+public class LoginController {
 
     @Autowired
     private NguoiDungDao nguoiDungDao;
@@ -30,34 +30,25 @@ public class loginController {
     }
 
     @RequestMapping("/submitLogin")
-    public String submitLogin(@RequestParam("idNguoiDung") String idNguoiDung,
-                            @RequestParam("matKhau") String matKhau, 
+    public String submitLogin(@RequestParam("TenDangNhap") String idNguoiDung,
+                            @RequestParam("MatKhau") String matKhau, 
                             Model model) {
         List<NguoiDung> nguoiDungs = nguoiDungDao.timTatCaNgoiDung();
         NguoiDung existingUser = null;
         for (NguoiDung nguoiDung : nguoiDungs) {
-            model.addAttribute("messCC", listNguoiDungString(nguoiDungs));
-            if (idNguoiDung.equals(nguoiDung.getMaNguoiDung())) {
+            if (nguoiDung.getMaNguoiDung().equals(idNguoiDung)) {
                 existingUser = nguoiDung;
             }
         }
         if(existingUser == null){
-            model.addAttribute("messLogin", "userFale");
+            model.addAttribute("messLogin", "Sai tên đăng nhập hoặc mật khẩu!");
             return "login";
         }else if (existingUser.getMatKhau().equals(matKhau)) {
-            model.addAttribute("messLogin", "successLogin");
-            return "login";
+            model.addAttribute("messLogin", "Đăng nhập thành công!");
+            return "index";
         } else {
-            model.addAttribute("messLogin", "failureLogin");
+            model.addAttribute("messLogin", "Sai tên đăng nhập hoặc mật khẩu!");
             return "login";
         }
-    }
-
-    private String listNguoiDungString(List<NguoiDung> listNguoiDungs){
-        String listNguoiDung = "";
-        for (NguoiDung nguoiDung : listNguoiDungs) {
-            listNguoiDung += nguoiDung.getTenNguoiDung() + ", ";
-        }
-        return listNguoiDung;
     }
 }

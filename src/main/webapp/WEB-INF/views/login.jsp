@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +15,11 @@
     <nav style="background-color: white ; height: 70px; display: flex;">
         <div style="width: 1200px; margin: auto;" class="navMenu">
             <a href="/index"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
-            <!-- <form action="#" class="formFind">
-                <input type="text" placeholder="Tìm kiếm...">
-                <button type="submit">Tìm kiếm</button>
-            </form> -->
+
             <ul class="ulMenu" style="width: 220px;">
-                <li><a href="/index">Trang chủ</a></li>
+                <li><a href="/quanLySanPham">Quản lý</a></li>
                 <li><a href="/login">Tài khoản</a></li>
-                <li><a href="#">Giỏ hàng</a></li>
+                <li><a href="/gioHang">Giỏ hàng</a></li>
             </ul>
         </div>
     </nav>
@@ -29,40 +27,65 @@
     <div class="container">
         <div class="formLogin">
             <div class="divSignUp">
-                <p class="p_Label">ĐĂNG KÍ</p>
-                <form action="" class="form">
-                    <div>
-                        <label for="usernameSigup">Tên đăng nhập</label>
-                        <input type="text">
+                <div class="divCenter">
+                    <div class="moduleLogin" style="align-items: center;">
+                        <p class="p_label" style="margin: 0;">Đăng kí</p>
                     </div>
                     <div>
-                        <label for="passwordSignup">Mật khẩu</label>
-                        <input type="password">
+                        <p class="textBassic" style="font-size: 20px; color: var(--color_main); margin: 40px 0 40px 0;">Đăng kí để nhận ưu đãi hấp dẫn</p>
+                        <div class="moduleLogin" style="align-items: center;">
+                            <button class="btnStyle2" style="height: 50px; width: 130px;">Đăng kí</button>
+                        </div>
                     </div>
-                    <div style="align-items: center;">
-                        <button class="submitBtn">Đăng kí</button>
+                    <div style="display: none;">
+                        <form action="" class="form">
+                            <div class="moduleLogin">
+                                <label for="TenDangNhap">Tên đăng nhập</label>
+                                <input type="text" name="TenDangNhap">
+                            </div>
+                            <div class="moduleLogin">
+                                <label for="MatKhau">Mật khẩu</label>
+                                <input type="password" name="MatKhau">
+                            </div>
+                            <div class="moduleLogin">
+                                <label style="color: red;">Sai mật khẩu</label>
+                            </div>
+                            <div class="moduleLogin" style="align-items: center; margin-top: 30px;">
+                                <button class="btnStyle1" style="width: 130px; height: 50px;">Đăng
+                                    nhập</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <p style="font-size: 20px; font-weight: 500; height: 20px; color: var(--color_main); margin-top: 38px; margin-bottom: 40px;">Đăng kí để nhận nhiều ưu đãi hấp dẫn</p>
-                    <button class="submitBtn" style="border: 1px solid; border-color: var(--color_main); font-size: var(--font-size_Normal); color: var(--color_main); background-color: white;">Đăng kí</button>
                 </div>
             </div>
             <div class="divLogin">
-                <p class="p_Label">ĐĂNG NHẬP</p>
-                <form action="/submitLogin" class="form" method="post">
+                <div class="divCenter">
+                    <div class="moduleLogin" style="align-items: center;">
+                        <p class="p_label">Đăng nhập</p>
+                    </div>
                     <div>
-                        <label for="usernameLogin">Tên đăng nhập</label>
-                        <input type="text" name="idNguoiDung"/>
+
                     </div>
-                    <div style="margin-bottom: 30px;">
-                        <label for="passwordLogin">Mật khẩu</label>
-                        <input type="password" name="matKhau" />
+                    <div>
+                        <form action="/submitLogin" class="form">
+                            <div class="moduleLogin">
+                                <label for="TenDangNhap">Tên đăng nhập</label>
+                                <input type="text" name="TenDangNhap">
+                            </div>
+                            <div class="moduleLogin">
+                                <label for="MatKhau">Mật khẩu</label>
+                                <input type="password" name="MatKhau" style="margin-bottom: 10px;">
+                            </div>
+                            <div class="moduleLogin" style="height: 20px;">
+                                <p class="error">${messLogin}</p>
+                            </div>
+                            <div class="moduleLogin" style="align-items: center; margin-top: 30px;">
+                                <button class="btnStyle1" style="width: 130px; height: 50px;">Đăng nhập</button>
+                            </div>
+                        </form>
                     </div>
-                    <div style="align-items: center;">
-                        <button type="submit" class="submitBtn">Đăng nhập</button>
-                    </div>
-                <form>
+                </div>
+
             </div>
         </div>
     </div>
@@ -73,16 +96,7 @@
     </footer>
 </body>
 <script>
-    var messLogin = '${messLogin}';
-    if(messLogin == 'successLogin'){
-        alert('Đăng nhập thành công !')
-    }
-    if(messLogin == 'failureLogin'){
-        alert('Đăng nhập thất bại !')
-    }
-
-    if(messLogin == 'userFale'){
-        alert('Không thấy người dùng !')
-    }
+   
 </script>
+
 </html>

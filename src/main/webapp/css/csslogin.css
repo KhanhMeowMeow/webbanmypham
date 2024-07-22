@@ -8,82 +8,60 @@
     height: 490px;
     width: 1000px;
     margin: auto;
-    margin-top: 82px;
-    margin-bottom: 82px;
+    margin-top: 80px;
+    margin-bottom: 70px;
     background-color: white;
     display: flex;
 }
 
-.formLogin>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.divCenter{
+    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.formLogin .divSignUp {
-    background-color: var(--color_main2);
-    width: 400px;
-}
-
-.formLogin .divSignUp form {
-    display: none;
-}
-
-.formLogin .divLogin {
-    background-color: none;
-    width: 600px;
-}
-
-.p_Label {
-    color: var(--color_main);
-    margin: 0;
+.p_label {
+    margin: 0 0 30px 0;
     padding: 0;
-    height: 40px;
+    color: var(--color_main);
     font-size: 40px;
-    font-weight: 600;
+    font-weight: bold;
 }
 
-.form {
-    margin-top: 30px;
-}
-
-.form>div {
+.moduleLogin {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    align-items: start;
 }
-
-.form input {
-    height: 30px;
-    width: 430px;
-    border: 0px solid;
-    margin: 0;
-    background-color: rgb(247, 247, 247);
-    padding: 10px;
-    font-size: var(--font-size_Normal);
+.moduleLogin>input {
+    margin: 0 0 20px 0;
+    border: none;
+    width: 400px;
+    padding: 15px;
+    font-size: 17px;
+    align-items: start;
+    background-color: var(--color_main3);
 }
-
-.form input:focus {
+.moduleLogin>label {
+    margin: 0 0 5px 0;
+    color: var(--color_main4);
+}
+.moduleLogin>input:focus{
     outline: none;
 }
-
-.form p {
-    font-size: 17px;
-    font-weight: 500;
+.divSignUp {
+    background-color: var(--color_main2);
+    width: 400px;
+    display: flex;
 }
-
-.form label {
-    font-size: 17px;
-    font-weight: 500;
-    margin-bottom: 5px;
+.divLogin {
+    background-color: none;
+    width: 600px;
+    display: flex;
 }
-.submitBtn {
-    height: 50px; 
-    width: 130px; 
-    border: 0; 
-    font-size: var(--font-size_Normal); 
-    color: white; 
-    background-color: var(--color_main); 
-    font-weight: 500;
+.divCenter{
+    margin: auto;
+}
+.messageLogin {
+    color: red;
 }

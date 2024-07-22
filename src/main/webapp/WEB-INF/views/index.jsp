@@ -18,9 +18,9 @@
             <button type="submit">Tìm kiếm</button>
         </form>
         <ul class="ulMenu" style="width: 220px;">
-            <li><a href="/index">Trang chủ</a></li>
+            <li><a href="/quanLySanPham">Quản lý</a></li>
             <li><a href="/login">Tài khoản</a></li>
-            <li><a href="#">Giỏ hàng</a></li>
+            <li><a href="/gioHang">Giỏ hàng</a></li>
         </ul>
     </div>
 </nav>
@@ -67,6 +67,9 @@
     </div>
 </footer>
 </body>
-<script src="/js/jsView.js"></script>
+<script>
+
+    
+</script>
 
 </html>
