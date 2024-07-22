@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import source.DAO.NguoiDungDao;
+import source.DAO.NguoiDungDAO;
 import source.model.NguoiDung;
 
 
@@ -21,9 +21,8 @@ import source.model.NguoiDung;
 public class LoginController {
 
     @Autowired
-    private NguoiDungDao nguoiDungDao;
+    private NguoiDungDAO nguoiDungDao;
     
-
     @GetMapping("/login")
     public String getLogin(@ModelAttribute("nguoiDung") NguoiDung nguoiDung) {
         return "login";

@@ -9,7 +9,7 @@ import source.model.NguoiDung;
 import source.repository.NguoiDungRepository;
 
 @Service
-public class NguoiDungDao {
+public class NguoiDungDAO {
     @Autowired
     private NguoiDungRepository nguoiDungRepository;
 
