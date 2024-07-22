@@ -1,9 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,29 +25,29 @@
         <div class="formLogin">
             <div class="divSignUp">
                 <div class="divCenter">
-                    <div class="moduleLogin" style="align-items: center;">
+                    <div class="moduleInput" style="align-items: center;">
                         <p class="p_label" style="margin: 0;">Đăng kí</p>
                     </div>
                     <div>
                         <p class="textBassic" style="font-size: 20px; color: var(--color_main); margin: 40px 0 40px 0;">Đăng kí để nhận ưu đãi hấp dẫn</p>
-                        <div class="moduleLogin" style="align-items: center;">
+                        <div class="moduleInput" style="align-items: center;">
                             <button class="btnStyle2" style="height: 50px; width: 130px;">Đăng kí</button>
                         </div>
                     </div>
                     <div style="display: none;">
                         <form action="" class="form">
-                            <div class="moduleLogin">
+                            <div class="moduleInput">
                                 <label for="TenDangNhap">Tên đăng nhập</label>
                                 <input type="text" name="TenDangNhap">
                             </div>
-                            <div class="moduleLogin">
+                            <div class="moduleInput">
                                 <label for="MatKhau">Mật khẩu</label>
                                 <input type="password" name="MatKhau">
                             </div>
-                            <div class="moduleLogin">
+                            <div class="moduleInput">
                                 <label style="color: red;">Sai mật khẩu</label>
                             </div>
-                            <div class="moduleLogin" style="align-items: center; margin-top: 30px;">
+                            <div class="moduleInput" style="align-items: center; margin-top: 30px;">
                                 <button class="btnStyle1" style="width: 130px; height: 50px;">Đăng
                                     nhập</button>
                             </div>
@@ -60,7 +57,7 @@
             </div>
             <div class="divLogin">
                 <div class="divCenter">
-                    <div class="moduleLogin" style="align-items: center;">
+                    <div class="moduleInput" style="align-items: center;">
                         <p class="p_label">Đăng nhập</p>
                     </div>
                     <div>
@@ -68,18 +65,18 @@
                     </div>
                     <div>
                         <form action="/submitLogin" class="form">
-                            <div class="moduleLogin">
+                            <div class="moduleInput">
                                 <label for="TenDangNhap">Tên đăng nhập</label>
                                 <input type="text" name="TenDangNhap">
                             </div>
-                            <div class="moduleLogin">
+                            <div class="moduleInput">
                                 <label for="MatKhau">Mật khẩu</label>
                                 <input type="password" name="MatKhau" style="margin-bottom: 10px;">
                             </div>
-                            <div class="moduleLogin" style="height: 20px;">
+                            <div class="moduleInput" style="height: 20px;">
                                 <p class="error">${messLogin}</p>
                             </div>
-                            <div class="moduleLogin" style="align-items: center; margin-top: 30px;">
+                            <div class="moduleInput" style="align-items: center; margin-top: 30px;">
                                 <button class="btnStyle1" style="width: 130px; height: 50px;">Đăng nhập</button>
                             </div>
                         </form>

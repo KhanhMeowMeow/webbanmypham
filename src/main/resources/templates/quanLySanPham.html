@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssquanLySanPham.css">
+    <title>Quản lý sản phẩm</title>
+</head>
+<body>
+    <nav style="background-color: white ; height: 70px; display: flex;">
+        <div style="width: 1200px; margin: auto;" class="navMenu">
+            <a href="/index"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+            <ul class="ulMenu" style="width: 220px;">
+                <li><a href="/quanLySanPham">Quản lý</a></li>
+                <li><a href="/login">Tài khoản</a></li>
+                <li><a href="/gioHang">Giỏ hàng</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="backGroundThemXoaSua">
+            <div class="containerItemInput">
+                <div class="columItemInput">
+                    <div class="moduleInput">
+                        <label for="MaSanPham">Mã sản phẩm</label>
+                        <input type="text" name="MaSanPham"> 
+                    </div>
+                    <div class="moduleInput">
+                        <label for="TenSanPham">Tên sản phẩm</label>
+                        <input type="text" name="TenSanPham"> 
+                    </div>
+                </div>
+                <div class="columItemInput">
+                    <div class="moduleInput">
+                        <label for="MaSanPham">Hình sản phẩm</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <div>
+                                
+                            </div>
+                            <label class="inputFileOutline">
+                                <input type="file" class="inputFile"> 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

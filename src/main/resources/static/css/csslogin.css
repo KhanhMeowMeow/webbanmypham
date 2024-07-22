@@ -27,28 +27,6 @@
     font-size: 40px;
     font-weight: bold;
 }
-
-.moduleLogin {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-.moduleLogin>input {
-    margin: 0 0 20px 0;
-    border: none;
-    width: 400px;
-    padding: 15px;
-    font-size: 17px;
-    align-items: start;
-    background-color: var(--color_main3);
-}
-.moduleLogin>label {
-    margin: 0 0 5px 0;
-    color: var(--color_main4);
-}
-.moduleLogin>input:focus{
-    outline: none;
-}
 .divSignUp {
     background-color: var(--color_main2);
     width: 400px;

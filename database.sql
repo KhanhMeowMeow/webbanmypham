@@ -92,3 +92,4 @@ INSERT INTO NguoiDung VALUES
 ('ND008', '1111111', N'Nguyễn Thương', 0, 'abc@gmail.com', '0987654321', N'Quận12'),
 ('ND009', '1111111', N'Nguyễn Văn Anh Việt', 0, 'abc@gmail.com', '0987654321', N'Quận12')
 
+SELECT * FROM "NguoiDung"
