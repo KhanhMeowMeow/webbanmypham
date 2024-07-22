@@ -71,12 +71,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>apache-jstl</artifactId>
-			<version>11.0.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
@@ -86,7 +80,11 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>3.3.1</version>
+		</dependency>
 
 	</dependencies>
 
