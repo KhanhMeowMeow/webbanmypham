@@ -38,11 +38,11 @@
                         <form action="" class="form">
                             <div class="moduleInput">
                                 <label for="TenDangNhap">Tên đăng nhập</label>
-                                <input type="text" name="TenDangNhap">
+                                <input type="text" name="TenDangNhap" class="input">
                             </div>
                             <div class="moduleInput">
                                 <label for="MatKhau">Mật khẩu</label>
-                                <input type="password" name="MatKhau">
+                                <input type="password" name="MatKhau" class="input">
                             </div>
                             <div class="moduleInput">
                                 <label style="color: red;">Sai mật khẩu</label>
@@ -67,14 +67,14 @@
                         <form action="/submitLogin" class="form">
                             <div class="moduleInput">
                                 <label for="TenDangNhap">Tên đăng nhập</label>
-                                <input type="text" name="TenDangNhap">
+                                <input type="text" name="TenDangNhap" class="input">
                             </div>
-                            <div class="moduleInput">
+                            <div class="moduleInput" style="margin-bottom: 0">
                                 <label for="MatKhau">Mật khẩu</label>
-                                <input type="password" name="MatKhau" style="margin-bottom: 10px;">
-                            </div>
-                            <div class="moduleInput" style="height: 20px;">
-                                <p class="error" th:text="${messLogin}"></p>
+                                <input type="password" name="MatKhau" class="input">
+                                <div class="errorOutline">
+                                    <p class="error" th:text="${messLogin}"></p>
+                                </div>
                             </div>
                             <div class="moduleInput" style="align-items: center; margin-top: 30px;">
                                 <button class="btnStyle1" style="width: 130px; height: 50px;">Đăng nhập</button>

@@ -27,6 +27,7 @@ public class SanPham {
     private int SoLuong;
     private String HinhAnh;
     private String MauSac;
+    private double DonGia;
     @ManyToOne
     @JoinColumn(name = "LoaiSanPham", referencedColumnName = "MaLoaiSanPham")
     private LoaiSanPham LoaiSanPham;

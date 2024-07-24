@@ -26,6 +26,9 @@ p {
 
 li {
     font-family: var(--font-family);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 button {
@@ -154,26 +157,41 @@ footer {
     border: 1px solid var(--color_main);
 }
 
+.btnStyle3{
+    color: var(--color_main);
+    font-size: var(--font-size_Normal);
+    background-color: var(--color_main2);
+    border: 1px solid var(--color_main);
+}
+
 .textBassic {
     margin: 0;
     padding: 0;
     font-size: var(--font-size_Normal);
 }
-
+.outlineError {
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 5px;
+}
 .error {
     margin: 0;
     padding: 0;
     color: red;
     font-size: var(--font-size_Normal);
-    height: 20px;
+    margin-top: 5px;
 }
-.containerItemInput {
-    display: flex;
-    justify-content: space-evenly;
-    height: 500px;
-}
-.columItemInput {
+.containerItem{
     margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: start;
+}
+.columItem {
     display: flex;
     flex-direction: column;
 }
@@ -183,7 +201,7 @@ footer {
     align-items: start;
     margin-bottom: 20px;
 }
-.moduleInput>input {
+.moduleInput>.input {
     margin: 0;
     border: none;
     width: 400px;
@@ -191,11 +209,51 @@ footer {
     font-size: 17px;
     align-items: start;
     background-color: var(--color_main3);
+    font-family: var(--font-family);
 }
 .moduleInput>label {
     margin: 0 0 5px 0;
     color: var(--color_main4);
 }
-.moduleInput>input:focus{
+.moduleInput>.input:focus{
     outline: none;
+}
+.errorOutline {
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 5px;
+}
+.error {
+    margin: 0;
+    padding: 0;
+    color: red;
+    font-size: var(--font-size_Normal);
+    margin-top: 5px;
+}
+.listLayout {
+    padding: 0;
+    margin: 10px 0 0 0;
+    max-height: 500px;
+    max-width: 1200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.listLayout::-webkit-scrollbar{
+    width: 10px;
+}
+
+.listLayout::-webkit-scrollbar-track {
+    background: white;
+}
+.listLayout::-webkit-scrollbar-thumb {
+    background: var(--color_main4);
+    border-radius: 2px;
+}
+.listLayout::-webkit-scrollbar-thumb:hover {
+    background: var(--color_main);
 }

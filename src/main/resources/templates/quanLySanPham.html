@@ -19,32 +19,181 @@
         </div>
     </nav>
     <div class="container">
-        <div class="backGroundThemXoaSua">
-            <div class="containerItemInput">
-                <div class="columItemInput">
+        <div class="columItem" style="background-color: white;">
+            <div class="containerItem">
+                <div class="columItem" style="margin-right: 20px;">
                     <div class="moduleInput">
                         <label for="MaSanPham">Mã sản phẩm</label>
-                        <input type="text" name="MaSanPham"> 
+                        <input type="text" name="MaSanPham" class="input"> 
+                        <div class="errorOutline">
+                            <p class="error">Mã sản phẩm đã tồn tại</p>
+                        </div>
                     </div>
                     <div class="moduleInput">
                         <label for="TenSanPham">Tên sản phẩm</label>
-                        <input type="text" name="TenSanPham"> 
+                        <input type="text" name="TenSanPham" class="input"> 
+                        <div class="errorOutline">
+                            <p class="error">Tên sản phẩm không chứa kí tự đặc biệt</p>
+                        </div>
+                    </div>
+                    <div class="moduleInput">
+                        <label for="DonGia">Đơn giá</label>
+                        <input type="number" name="DonGia" class="input"> 
+                        <div class="errorOutline">
+                            <p class="error"></p>
+                        </div>
+                    </div>
+                    <div class="moduleInput">
+                        <label for="MauSac">Màu sắc</label>
+                        <input type="text" name="MauSac" class="input"> 
+                        <div class="errorOutline">
+                            <p class="error"></p>
+                        </div>
                     </div>
                 </div>
-                <div class="columItemInput">
+                <div class="columItem" style="margin-right: 20px;">
                     <div class="moduleInput">
                         <label for="HinhSanPham">Hình sản phẩm</label>
-                        <div style="display: flex; flex-direction: row;">
-                            <div>
-                                
+                        <div class="columItem">
+                            <div style="display: flex; flex-direction: row;">
+                                <div style="display: flex;">
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
+                                        
+                                    </div>
+                                </div>
+                                <label class="inputFileOutline">
+                                    <input type="file" class="inputFile"> 
+                                </label>
                             </div>
-                            <label class="inputFileOutline">
-                                <input type="file" class="inputFile"> 
-                            </label>
+                            <div style="display: flex; flex-direction: row;">
+                                <div style="height: 109px; width: 109px; background-color: var(--color_main3); margin-top: 5px;">
+                                
+                                </div>
+                                <button class="btnStyle3" style="margin: 5px 0 0 5px; height: 33px; width: 71px;">Xóa</button>
+                            </div>
+                        </div>
+                        <div class="errorOutline">
+                            <p class="error"></p>
+                        </div>
+                    </div>
+                    <div class="moduleInput">
+                        <label for="SoLuong">Số lượng sản phẩm</label>
+                        <input type="number" name="SoLuong" class="input"> 
+                        <div class="errorOutline">
+                            <p class="error"></p>
+                        </div>
+                    </div>
+                    <div class="moduleInput">
+                        <label for="LoaiSanPham">Loại sản phẩm</label>
+                        <select name="" id="" class="input" style="width: 570px;">
+                            <option value="">SP001</option>
+                            <option value="">SP001</option>
+                            <option value="">SP001</option>
+                            <option value="">SP001</option>
+                        </select> 
+                        <div class="errorOutline">
+                            <p class="error"></p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="containerItem">
+                <div class="moduleInput" style="margin: 0;">
+                    <label for="MoTa">Mô tả</label>
+                    <textarea name="MoTa" class="input" style="height: 400px; width: 1130px;"></textarea>
+                </div>
+            </div>
+            <div style="justify-content: center; margin-bottom: 20px; margin-left: 0;" class="containerItem">
+                <div style="display: flex; justify-content: space-between; width: 550px;">
+                    <button class="btnStyle2" style="width: 130px; height: 50px;">Thêm</button>
+                    <button class="btnStyle2" style="width: 130px; height: 50px;">Xóa</button>
+                    <button class="btnStyle2" style="width: 130px; height: 50px;">Sửa</button>
+                    <button class="btnStyle2" style="width: 130px; height: 50px;">Mới</button>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px" class="columItem">
+            <div style="display: flex; justify-content: center;">
+                <form action="#" class="formFind">
+                    <input type="text" placeholder="Tìm kiếm...">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; width: 1200px; height: 50px; background-color: white; margin-top: 10px;">
+                <div style="display: flex; justify-content: space-between; width: 700px;">
+                    <p class="textBassic" style="color: var(--color_main4);">Hình</p>
+                    <p class="textBassic" style="color: var(--color_main4);">Tên sản phẩm</p>
+                    <p class="textBassic" style="color: var(--color_main4);">Đơn giá</p>
+                    <p class="textBassic" style="color: var(--color_main4);">Số lượng</p>
+                </div>
+            </div>
+            <ul class="listLayout">
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+
+                <li>
+                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
+                        Hello mấy cưng
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </body>

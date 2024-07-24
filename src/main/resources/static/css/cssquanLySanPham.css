@@ -10,10 +10,11 @@
 }
 
 .moduleInput {
+    margin-bottom: 15px;
     width: 570px;
 }
 
-.moduleInput>input {
+.moduleInput>.input {
     width: 540px;
 }
 

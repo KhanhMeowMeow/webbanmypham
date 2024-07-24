@@ -32,7 +32,8 @@ CREATE Table SanPham (
     HinhAnh Nvarchar(max),
     LoaiSanPham Nvarchar(10),
     MauSac Nvarchar(max),
-    MoTa Nvarchar(max)
+    MoTa Nvarchar(max),
+    DonGia Float
 )
 
 CREATE TABLE LoaiSanPham (
