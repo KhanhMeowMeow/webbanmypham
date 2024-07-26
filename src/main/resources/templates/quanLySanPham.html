@@ -8,10 +8,10 @@
     <title>Quản lý sản phẩm</title>
 </head>
 <body>
-    <nav style="background-color: white ; height: 70px; display: flex;">
-        <div style="width: 1200px; margin: auto;" class="navMenu">
+    <nav>
+        <div class="layoutItemMenu">
             <a href="/index"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
-            <ul class="ulMenu" style="width: 220px;">
+            <ul class="miniMenu">
                 <li><a href="/quanLySanPham">Quản lý</a></li>
                 <li><a href="/login">Tài khoản</a></li>
                 <li><a href="/gioHang">Giỏ hàng</a></li>
@@ -19,182 +19,153 @@
         </div>
     </nav>
     <div class="container">
-        <div class="columItem" style="background-color: white;">
-            <div class="containerItem">
-                <div class="columItem" style="margin-right: 20px;">
-                    <div class="moduleInput">
-                        <label for="MaSanPham">Mã sản phẩm</label>
-                        <input type="text" name="MaSanPham" class="input"> 
-                        <div class="errorOutline">
-                            <p class="error">Mã sản phẩm đã tồn tại</p>
+        <div class="backGroundThemXoaSua">
+            <form th:action="@{/quanLySanPham/them}" th:object="${SanPham}" enctype="multipart/form-data" method="post">
+                <div class="rowInput">
+                    <div class="columInput">
+                        <div class="moduleInput">
+                            <label for="MaSanPham">Mã sản phẩm</label>
+                            <input type="text" name="MaSanPham" class="input" th:field="*{MaSanPham}"> 
+                            <div class="errorOutline">
+                                <p class="error">Mã sản phẩm đã tồn tại</p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="TenSanPham">Tên sản phẩm</label>
+                            <input type="text" name="TenSanPham" class="input" th:field="*{TenSanPham}"> 
+                            <div class="errorOutline">
+                                <p class="error">Tên sản phẩm không chứa kí tự đặc biệt</p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="DonGia">Đơn giá</label>
+                            <input type="number" name="DonGia" class="input"  th:value="*{getDonGiaDecimal()}" th:field="*{DonGia}"/> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="MauSac">Màu sắc</label>
+                            <input type="text" name="MauSac" class="input"  th:field="*{MauSac}"> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="moduleInput">
-                        <label for="TenSanPham">Tên sản phẩm</label>
-                        <input type="text" name="TenSanPham" class="input"> 
-                        <div class="errorOutline">
-                            <p class="error">Tên sản phẩm không chứa kí tự đặc biệt</p>
-                        </div>
-                    </div>
-                    <div class="moduleInput">
-                        <label for="DonGia">Đơn giá</label>
-                        <input type="number" name="DonGia" class="input"> 
-                        <div class="errorOutline">
-                            <p class="error"></p>
-                        </div>
-                    </div>
-                    <div class="moduleInput">
-                        <label for="MauSac">Màu sắc</label>
-                        <input type="text" name="MauSac" class="input"> 
-                        <div class="errorOutline">
-                            <p class="error"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="columItem" style="margin-right: 20px;">
-                    <div class="moduleInput">
-                        <label for="HinhSanPham">Hình sản phẩm</label>
-                        <div class="columItem">
+                    <div class="columInput">
+                        <div class="moduleInput">
+                            <label for="HinhSanPham">Hình sản phẩm</label>
                             <div style="display: flex; flex-direction: row;">
                                 <div style="display: flex;">
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
-                                    <div style="height: 50px; width: 50px; background-color: var(--color_main3); margin-right: 5px;">
-                                        
-                                    </div>
+                                    
                                 </div>
-                                <label class="inputFileOutline">
-                                    <input type="file" class="inputFile"> 
+                                <label>
+                                    <input id="inputHinhSanPham" type="file" class="input" name="fileImage"> 
                                 </label>
                             </div>
+    
                             <div style="display: flex; flex-direction: row;">
-                                <div style="height: 109px; width: 109px; background-color: var(--color_main3); margin-top: 5px;">
-                                
+                                <div style="height: 109px; width: 109px; background-color: var(--color_main2); margin-top: 5px;">
+                                    <img th:src="@{|/image/sanpham/*{HinhAnh}|}" id="hinhSanPham"  style="width: 100%; height: 100%;">
                                 </div>
-                                <button class="btnStyle3" style="margin: 5px 0 0 5px; height: 33px; width: 71px;">Xóa</button>
+                                <button class="btnStyle3" style="margin: 5px 0 0 5px; height: 33px; width: 71px; display: none;">Xóa</button>
+                            </div>
+                            
+                            <div class="errorOutline">
+                                <p class="error"></p>
                             </div>
                         </div>
-                        <div class="errorOutline">
-                            <p class="error"></p>
+                        <div class="moduleInput">
+                            <label for="SoLuong">Số lượng sản phẩm</label>
+                            <input type="number" name="SoLuong" class="input"  th:field="*{SoLuong}"> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="moduleInput">
-                        <label for="SoLuong">Số lượng sản phẩm</label>
-                        <input type="number" name="SoLuong" class="input"> 
-                        <div class="errorOutline">
-                            <p class="error"></p>
-                        </div>
-                    </div>
-                    <div class="moduleInput">
-                        <label for="LoaiSanPham">Loại sản phẩm</label>
-                        <select name="" id="" class="input" style="width: 570px;">
-                            <option value="">SP001</option>
-                            <option value="">SP001</option>
-                            <option value="">SP001</option>
-                            <option value="">SP001</option>
-                        </select> 
-                        <div class="errorOutline">
-                            <p class="error"></p>
+                        <div class="moduleInput">
+                            <label for="LoaiSanPham">Loại sản phẩm</label>
+                            <select name="" id="" class="input" style="width: 570px;" th:field="*{LoaiSanPham}">
+                                <option value="">LSP001</option>
+                                <option value="">LSP002</option>
+                                <option value="">LSP003</option>
+                                <option value="">LSP004</option>
+                            </select> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="containerItem">
-                <div class="moduleInput" style="margin: 0;">
+                
+                <div class="moduleInput" style="margin-left: 20px;">
                     <label for="MoTa">Mô tả</label>
-                    <textarea name="MoTa" class="input" style="height: 400px; width: 1130px;"></textarea>
+                    <textarea name="MoTa" class="input" style="height: 400px; width: 1130px;" th:field="*{MoTa}"></textarea>
                 </div>
-            </div>
-            <div style="justify-content: center; margin-bottom: 20px; margin-left: 0;" class="containerItem">
-                <div style="display: flex; justify-content: space-between; width: 550px;">
-                    <button class="btnStyle2" style="width: 130px; height: 50px;">Thêm</button>
-                    <button class="btnStyle2" style="width: 130px; height: 50px;">Xóa</button>
-                    <button class="btnStyle2" style="width: 130px; height: 50px;">Sửa</button>
-                    <button class="btnStyle2" style="width: 130px; height: 50px;">Mới</button>
+
+                <div class="rowButton">
+                    <button type="submit" class="btnStyle2" style="width: 130px; height: 50px;">Thêm</button>
+                    <a href="#" class="linkButton">
+                        <button class="btnStyle2" style="width: 130px; height: 50px;">Xóa</button>
+                    </a>
+                    <a th:href="@{/quanLySanPham}" class="linkButton">
+                        <button class="btnStyle2" style="width: 130px; height: 50px;">Mới</button>
+                    </a>
+                    <a href="#" class="linkButton">
+                        <button class="btnStyle2" style="width: 130px; height: 50px;">Xuất</button>
+                    </a>
                 </div>
-            </div>
+            </form>
         </div>
-        <div style="margin-top: 20px" class="columItem">
+        <div style="margin-top: 20px">
             <div style="display: flex; justify-content: center;">
                 <form action="#" class="formFind">
                     <input type="text" placeholder="Tìm kiếm...">
                     <button type="submit">Tìm kiếm</button>
                 </form>
             </div>
-            <div style="display: flex; justify-content: center; align-items: center; width: 1200px; height: 50px; background-color: white; margin-top: 10px;">
-                <div style="display: flex; justify-content: space-between; width: 700px;">
-                    <p class="textBassic" style="color: var(--color_main4);">Hình</p>
-                    <p class="textBassic" style="color: var(--color_main4);">Tên sản phẩm</p>
-                    <p class="textBassic" style="color: var(--color_main4);">Đơn giá</p>
-                    <p class="textBassic" style="color: var(--color_main4);">Số lượng</p>
+            
+            <div class="titleList">
+                <div>
+                    <p style="width: 120px;">Hình</p>
+                    <p style="width: 266px;">Tên sản phẩm</p>
+                    <p style="width: 150px;">Đơn giá</p>
+                    <p style="width: 100px;">Số lượng</p>
                 </div>
             </div>
-            <ul class="listLayout">
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
+            <ul class="list" style="max-height: 500px;">
+                <li class="productItemLayout" th:each="sanpham : ${listSanPham}">
+                    <a th:href="@{|/quanLySanPham/chon?MaSanPham=${sanpham.MaSanPham}|}" class="textBassic">
+                        <button class="btnProductItem" style="background-color: var(--color_main); color: white;">Chọn</button>
+                    </a>
+                    <div class="inforProduct">
+                        <img th:src="@{|/image/sanpham/${sanpham.HinhAnh}|}" alt="Hình sản phẩm" width="120px" height="120px">
+                        <div style="height: 100%; width: 266px;">
+                            <p class="textBassic" style="font-size: 25px;" th:text="${sanpham.TenSanPham}"></p>
+                        </div>
+                        <p style="font-size: 25px; color: var(--color_main);" th:text="${sanpham.getDonGiaDecimal()}"></p>
+                        <div style="background-color: var(--color_main3); height: 32px; width: 100px; display: flex; justify-content: center; align-items: center;">
+                            <p style="font-size: 25px;" class="textBassic" th:text="${sanpham.SoLuong}"></p>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
-                </li>
-
-                <li>
-                    <div style="width: 1200px; height: 100px; background-color: white; margin: 0 0 10px 0;" class="containerItem">
-                        Hello mấy cưng
-                    </div>
+                    <a th:href="@{|/quanLySanPham/xoa?MaSanPham=${sanpham.MaSanPham}|}" class="textBassic">
+                        <button class="btnProductItem" style="background-color: var(--color_main2); color: var(--color_main);">Xóa</button>
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
 </body>
+<script>
+    
+    const fileInput = document.getElementById('inputHinhSanPham');
+    const imagePreview = document.getElementById('hinhSanPham');
+    fileInput.addEventListener('change', function(){
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event){
+            imagePreview.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+    });
+</script>
 </html>

@@ -94,3 +94,20 @@ INSERT INTO NguoiDung VALUES
 ('ND009', '1111111', N'Nguyễn Văn Anh Việt', 0, 'abc@gmail.com', '0987654321', N'Quận12')
 
 SELECT * FROM "NguoiDung"
+
+INSERT INTO LoaiSanPham VALUES
+('LSP001', N'Nhập từ Mỹ Tho'),
+('LSP002', N'Nhập từ Mỹ Đình'),
+('LSP003', N'Nhập từ Trung Quốc'),
+('LSP004', N'Nhập từ Mẽo'),
+('LSP005', N'Hàng nhập nội'),
+('LSP006', N'Hàng nhập sĩ'),
+('LSP007', N'Hàng tồn kho')
+
+INSERT INTO SanPham VALUES
+('SP001',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
+('SP002',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
+('SP003',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
+('SP004',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
+('SP005',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
+('SP006',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000)

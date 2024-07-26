@@ -38,4 +38,9 @@ public class SanPham {
 
     @OneToMany(mappedBy = "SanPham")
     private Set<DonHangChiTiet> DonHangChiTiets;
+    
+    public String getDonGiaDecimal(){
+        return String.format("%.0f", DonGia);
+    }
 }
+

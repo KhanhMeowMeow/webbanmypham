@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .product-menu {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .product {
+            break-inside: avoid; /* Ngăn việc sản phẩm bị chia giữa các cột */
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        @media (max-width: 768px) {
+            .product-menu {
+                column-count: 2; /* Giảm số lượng cột trên màn hình nhỏ hơn */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-menu {
+                column-count: 1; /* Chỉ còn 1 cột trên màn hình điện thoại */
+            }
+        }
+    </style>
+    <title>Product Menu</title>
+</head>
+<body>
+    <div class="product-menu">
+        <div class="product">
+            <h2>Product 1</h2>
+            <p>Price: $10.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product 2</h2>
+            <p>Price: $15.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product 3</h2>
+            <p>Price: $20.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product 3</h2>
+            <p>Price: $20.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product 3</h2>
+            <p>Price: $20.00</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Product 3</h2>
+            <p>Price: $20.00</p>
+            <button>Add to Cart</button>
+        </div>
+
+        
+        <!-- Thêm nhiều sản phẩm khác -->
+    </div>
+</body>
+</html>

@@ -7,6 +7,7 @@
     --font-family: Asap Condensed;
 }
 
+/* module */
 body {
     background-color: var(--color_main3);
     margin: 0;
@@ -14,6 +15,8 @@ body {
 
 a {
     font-family: var(--font-family);
+    text-decoration: none;
+    color: black;
 }
 
 label {
@@ -32,6 +35,7 @@ li {
 }
 
 button {
+    text-align: center;
     font-family: var(--font-family);
 }
 
@@ -43,32 +47,153 @@ input {
     width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.navMenu {
+.btnStyle1{
+    color: white;
+    font-size: var(--font-size_Normal);
+    background-color: var(--color_main);
+    border: 1px solid var(--color_main);
+}
+
+.btnStyle2{
+    color: var(--color_main);
+    font-size: var(--font-size_Normal);
+    background-color: white;
+    border: 1px solid var(--color_main);
+}
+
+.btnStyle3{
+    color: var(--color_main);
+    font-size: var(--font-size_Normal);
+    background-color: var(--color_main2);
+    border: 1px solid var(--color_main);
+}
+.btnStyle4{
+    color: var(--color_main);
+    font-size: var(--font-size_Normal);
+    background-color: var(--color_main2);
+}
+
+.textBassic {
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-size_Normal);
+    text-decoration: none;
+}
+.outlineError {
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 5px;
+}
+.error {
+    margin: 0;
+    padding: 0;
+    color: red;
+    font-size: var(--font-size_Normal);
+    margin-top: 5px;
+}
+.moduleInput {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 20px;
+}
+.moduleInput .input {
+    margin: 0;
+    border: none;
+    width: 400px;
+    padding: 15px;
+    font-size: 17px;
+    align-items: start;
+    background-color: var(--color_main3);
+    font-family: var(--font-family);
+}
+.moduleInput>label {
+    margin: 0 0 5px 0;
+    color: var(--color_main4);
+}
+.moduleInput>.input:focus{
+    outline: none;
+}
+.errorOutline {
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 5px;
+}
+.error {
+    margin: 0;
+    padding: 0;
+    color: red;
+    font-size: var(--font-size_Normal);
+    margin-top: 5px;
+}
+.list {
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar{
+    width: 10px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: white;
+}
+.list::-webkit-scrollbar-thumb {
+    background: var(--color_main4);
+    border-radius: 2px;
+}
+.list::-webkit-scrollbar-thumb:hover {
+    background: var(--color_main);
+}
+
+nav {
+    background-color: white;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.layoutItemMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    margin: auto;
+}
+.miniMenu {
+    margin: 0;
+    padding: 0;
+    width: 220px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.ulMenu {
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
+.miniMenu a {
+    color: var(--color_main);
 }
 
-.ulMenu a {
-    font-family: var(--font-family);
-    font-size: 17px;
-    color: var(--color_main);
+.linkButton {
+    text-align: center;
     text-decoration: none;
-}
-
-.ulMenuTextColor a {
-    font-size: var(--font-size_Normal);
     color: var(--color_main);
-    font-weight: bold;
+    font-size: var(--font-size_Normal);
+    font-family: var(--font-family);
 }
 
 .formFind input {
@@ -96,6 +221,20 @@ input {
     font-size: var(--font-size_Normal);
 }
 
+/* Trang chu */
+.menu2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--color_main2);
+    height: 50px;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+.menu2 a {
+    color: var(--color_main);
+    font-weight: bold;
+}
 .listProducts {
     width: 100%;
 }
@@ -141,119 +280,4 @@ footer {
     height: 300px;
     background-color: var(--color_main);
     margin-top: 10px;
-}
-
-.btnStyle1{
-    color: white;
-    font-size: var(--font-size_Normal);
-    background-color: var(--color_main);
-    border: 1px solid var(--color_main);
-}
-
-.btnStyle2{
-    color: var(--color_main);
-    font-size: var(--font-size_Normal);
-    background-color: white;
-    border: 1px solid var(--color_main);
-}
-
-.btnStyle3{
-    color: var(--color_main);
-    font-size: var(--font-size_Normal);
-    background-color: var(--color_main2);
-    border: 1px solid var(--color_main);
-}
-
-.textBassic {
-    margin: 0;
-    padding: 0;
-    font-size: var(--font-size_Normal);
-}
-.outlineError {
-    margin: 0;
-    padding: 0;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-top: 5px;
-}
-.error {
-    margin: 0;
-    padding: 0;
-    color: red;
-    font-size: var(--font-size_Normal);
-    margin-top: 5px;
-}
-.containerItem{
-    margin-top: 20px;
-    margin-left: 20px;
-    display: flex;
-    justify-content: start;
-}
-.columItem {
-    display: flex;
-    flex-direction: column;
-}
-.moduleInput {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-bottom: 20px;
-}
-.moduleInput>.input {
-    margin: 0;
-    border: none;
-    width: 400px;
-    padding: 15px;
-    font-size: 17px;
-    align-items: start;
-    background-color: var(--color_main3);
-    font-family: var(--font-family);
-}
-.moduleInput>label {
-    margin: 0 0 5px 0;
-    color: var(--color_main4);
-}
-.moduleInput>.input:focus{
-    outline: none;
-}
-.errorOutline {
-    margin: 0;
-    padding: 0;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-top: 5px;
-}
-.error {
-    margin: 0;
-    padding: 0;
-    color: red;
-    font-size: var(--font-size_Normal);
-    margin-top: 5px;
-}
-.listLayout {
-    padding: 0;
-    margin: 10px 0 0 0;
-    max-height: 500px;
-    max-width: 1200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.listLayout::-webkit-scrollbar{
-    width: 10px;
-}
-
-.listLayout::-webkit-scrollbar-track {
-    background: white;
-}
-.listLayout::-webkit-scrollbar-thumb {
-    background: var(--color_main4);
-    border-radius: 2px;
-}
-.listLayout::-webkit-scrollbar-thumb:hover {
-    background: var(--color_main);
 }
