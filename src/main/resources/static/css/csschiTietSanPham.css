@@ -1,0 +1,122 @@
+@import url('/css/cssindex.css');
+
+.productContent {
+    background-color: white;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    justify-content:start;
+    align-items: center;
+}
+
+.productContent > img{
+    width: 400px;
+    height: 400px;
+    box-shadow: -2px 2px 4px 1px gray;
+}
+.inforProductContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: 400px;
+    margin: 0 0 0 20px;
+}
+
+.inforProductContent .nameProduct {
+    font-size: 40px;
+}
+
+.inforProductContent .priceProduct {
+    color: var(--color_main);
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.inforProductContent .colorProduct {
+    font-size: 32px; 
+    color: var(--color_main4); 
+    margin-top: 20px;
+}
+
+.inforProductContent .listButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 428px;
+    margin-top: 20px;
+}
+
+.inforProductContent .button {
+    height: 50px;
+    width: 204px;
+}
+
+.contentProduct {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.contentProduct .title{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.contentProduct .content{
+    pointer-events: none;
+    font-family: var(--font-family);
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    height: 200px;
+    font-weight: normal;
+    color: black;
+}
+
+.listProducts {
+    margin-top: 20px;
+    width: 1200px;
+}
+
+.listProducts>p {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    color: var(--color_main4);
+    font-size: 25px;
+    height: 29px;
+}
+
+.layoutProduct {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    max-width: 1200px;
+}
+
+.product {
+    width: 232px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.product img{
+    width: 204px;
+    height: 204px;
+    margin: 14px 14px 0 14px;
+}
+
+.inforProduct{
+    margin: 5px 14px 14px 14px;
+}
+
+.inforProduct > p{
+    margin: 0;
+    padding: 0;
+}

@@ -22,7 +22,8 @@ CREATE TABLE GioHang (
 CREATE TABLE GioHangChiTiet (
     MaGioHangChiTiet Nvarchar(10) PRIMARY KEY,
     GioHang Nvarchar(10),
-    SanPham Nvarchar(10)
+    SanPham Nvarchar(10),
+    SoLuong int
 )
 
 CREATE Table SanPham (
@@ -111,3 +112,19 @@ INSERT INTO SanPham VALUES
 ('SP004',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
 ('SP005',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000),
 ('SP006',N'Son Môi',100,'hinhanh.jpg','LSP001',N'Đỏ gạch',N'Sản phẩm xịn',25000000)
+
+SELECT Top 8 * from SanPham ORDER BY MaSanPham Desc
+
+SELECT * FROM GioHangChiTiet
+
+SELECT * FROM GioHang
+
+
+SELECT GioHangChiTiet.SanPham, GioHangChiTiet.SoLuong From GioHangChiTiet 
+INNER JOIN GioHang 
+on GioHang.MaGioHang =  GioHangChiTiet.GioHang
+WHERE GioHang.NguoiDUng = 'ND001'
+
+SELECT * From GioHang WHERE GioHang.NguoiDung = 'ND001'
+
+Select SanPham from GioHangChiTiet WHERE GioHang = 'GH_ND001'

@@ -1,0 +1,154 @@
+@import url("/css/cssindex.css");
+
+.cartTitle {
+    background-color: white;
+    width: 1200px;
+    height: 80px;
+    padding: 0 15px 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chose {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.chose>input[type="checkbox"] {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border: 2px solid var(--color_main);
+    cursor: pointer;
+}
+
+.chose>input[type="checkbox"]:checked {
+    background-color: var(--color_main);
+    /* Thay đổi nền khi chọn */
+    border-color: var(--color_main);
+    /* Thay đổi viền khi chọn */
+}
+
+.chose>label {
+    font-size: 28px;
+    color: var(--color_main4);
+    margin-left: 10px;
+    /* Khoảng cách giữa checkbox và label */
+    cursor: pointer;
+    /* Thay đổi con trỏ khi hover */
+}
+
+.buy {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.buy>p {
+    color: var(--color_main4);
+    font-size: 28px;
+}
+
+.buy>p>span {
+    color: var(--color_main);
+    font-size: 35px;
+}
+
+.buy .btnBuy {
+    margin-left: 30px;
+    width: 200px;
+    height: 50px;
+    font-size: 21px;
+}
+
+.listProduct {
+    display: flex;
+    flex-direction: column;
+}
+
+.productItem {
+    margin-top: 10px;
+    background-color: white;
+    padding: 0 0 0 15px;
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inforProductItem {
+    margin: 15px 0 15px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.inforProductItem > img {
+    width: 120px;
+    height: 120px;
+}
+
+.textInforProductItem{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+}
+.textInforProductItem > p {
+    color: var(--color_main4);
+    font-size: 25px;
+}
+.textPrice {
+    color: var(--color_main);
+    font-size: 25px;
+}
+
+.quanlityProductItem {
+    width: 130px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+}
+.quanlityProductItem > input {
+    height: 32px;
+    width: 66px;
+    font-size: 28px;
+    background-color: var(--color_main3);
+    border: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.quanlityProductItem > input:focus {
+    outline: none;
+}
+
+.quanlityProductItem > button {
+    height: 32px;
+    width: 32px;
+    border: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Xóa mũi tên */
+    margin: 0; /* Đảm bảo không có khoảng cách */
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Xóa mũi tên */
+}
+
+input[type="number"]::-ms-expand {
+    display: none; /* Xóa mũi tên */
+}
+
+.btnDelete {
+    height: 100%;
+    width: 65px;
+}

@@ -10,9 +10,22 @@
 <body>
     <nav>
         <div class="layoutItemMenu">
-            <a href="/index"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+            <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
             <ul class="miniMenu">
-                <li><a href="/quanLySanPham">Quản lý</a></li>
+                <li class="sup-menu"><a>Quản lý</a>
+                    <ul class="child-menu">
+                        <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
+                        <li><a href="">Quản lý người dùng</a></li>
+                        <li><a href="">Quản lý loại</a></li>
+                        <li class="sup-menu"><a href="">Thống kê</a>
+                            <ul class="child-menu">
+                                <li><a href="">Thống kê sản phẩm</a></li>
+                                <li><a href="">Thống kê doanh thu</a></li>
+                                <li><a href="">Thống kê giỏ hàng</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
                 <li><a href="/login">Tài khoản</a></li>
                 <li><a href="/gioHang">Giỏ hàng</a></li>
             </ul>
@@ -27,28 +40,28 @@
                             <label for="MaSanPham">Mã sản phẩm</label>
                             <input type="text" name="MaSanPham" class="input" th:field="*{MaSanPham}"> 
                             <div class="errorOutline">
-                                <p class="error">Mã sản phẩm đã tồn tại</p>
+                                <p class="error" th:if="${#fields.hasErrors('MaSanPham')}" th:errors="*{MaSanPham}"></p>
                             </div>
                         </div>
                         <div class="moduleInput">
                             <label for="TenSanPham">Tên sản phẩm</label>
                             <input type="text" name="TenSanPham" class="input" th:field="*{TenSanPham}"> 
                             <div class="errorOutline">
-                                <p class="error">Tên sản phẩm không chứa kí tự đặc biệt</p>
+                                <p class="error" th:if="${#fields.hasErrors('TenSanPham')}" th:errors="*{TenSanPham}"></p>
                             </div>
                         </div>
                         <div class="moduleInput">
                             <label for="DonGia">Đơn giá</label>
                             <input type="number" name="DonGia" class="input"  th:value="*{getDonGiaDecimal()}" th:field="*{DonGia}"/> 
                             <div class="errorOutline">
-                                <p class="error"></p>
+                                <p class="error" th:if="${#fields.hasErrors('DonGia')}" th:errors="*{DonGia}"></p>
                             </div>
                         </div>
                         <div class="moduleInput">
                             <label for="MauSac">Màu sắc</label>
                             <input type="text" name="MauSac" class="input"  th:field="*{MauSac}"> 
                             <div class="errorOutline">
-                                <p class="error"></p>
+                                <p class="error" th:if="${#fields.hasErrors('MauSac')}" th:errors="*{MauSac}"></p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +73,7 @@
                                     
                                 </div>
                                 <label>
-                                    <input id="inputHinhSanPham" type="file" class="input" name="fileImage"> 
+                                    <input id="inputHinhSanPham" type="file" class="input" name="fileImage" style="height: 20px;" th:value="*{HinhAnh}"> 
                                 </label>
                             </div>
     
@@ -72,26 +85,29 @@
                             </div>
                             
                             <div class="errorOutline">
-                                <p class="error"></p>
+                                <p class="error" th:text="${mestHinhAnh}"></p>
                             </div>
                         </div>
                         <div class="moduleInput">
                             <label for="SoLuong">Số lượng sản phẩm</label>
                             <input type="number" name="SoLuong" class="input"  th:field="*{SoLuong}"> 
                             <div class="errorOutline">
-                                <p class="error"></p>
+                                <p class="error" th:if="${#fields.hasErrors('SoLuong')}" th:errors="*{SoLuong}"></p>
                             </div>
                         </div>
                         <div class="moduleInput">
                             <label for="LoaiSanPham">Loại sản phẩm</label>
-                            <select name="" id="" class="input" style="width: 570px;" th:field="*{LoaiSanPham}">
-                                <option value="">LSP001</option>
-                                <option value="">LSP002</option>
-                                <option value="">LSP003</option>
-                                <option value="">LSP004</option>
-                            </select> 
+                            <select name="LoaiSanPham" class="input" style="width: 570px;">
+                                <option th:each="loaiSanPham : ${listLoaiSanPham}" 
+                                        th:text="${loaiSanPham.getTenLoaiSanPham()}" 
+                                        th:value="${loaiSanPham.getMaLoaiSanPham()}"></option>
+                                <option th:value="*{LoaiSanPham.getMaLoaiSanPham()}" 
+                                        th:text="*{LoaiSanPham.getTenLoaiSanPham()}"
+                                        th:if="*{LoaiSanPham != null}"
+                                        selected></option>
+                            </select>
                             <div class="errorOutline">
-                                <p class="error"></p>
+                                <p class="error" th:text="${messLoaiSanPham}"></p>
                             </div>
                         </div>
                     </div>
@@ -99,19 +115,19 @@
                 
                 <div class="moduleInput" style="margin-left: 20px;">
                     <label for="MoTa">Mô tả</label>
-                    <textarea name="MoTa" class="input" style="height: 400px; width: 1130px;" th:field="*{MoTa}"></textarea>
+                    <textarea name="MoTa" class="input" style="height: 200px; width: 1130px;" th:field="*{MoTa}"></textarea>
                 </div>
 
                 <div class="rowButton">
                     <button type="submit" class="btnStyle2" style="width: 130px; height: 50px;">Thêm</button>
-                    <a href="#" class="linkButton">
-                        <button class="btnStyle2" style="width: 130px; height: 50px;">Xóa</button>
+                    <a th:href="@{|/quanLySanPham/xoa?MaSanPham=*{MaSanPham}|}" class="linkButton">
+                        <button type="button" class="btnStyle2" style="width: 130px; height: 50px;">Xóa</button>
                     </a>
                     <a th:href="@{/quanLySanPham}" class="linkButton">
-                        <button class="btnStyle2" style="width: 130px; height: 50px;">Mới</button>
+                        <button type="button" class="btnStyle2" style="width: 130px; height: 50px;">Mới</button>
                     </a>
                     <a href="#" class="linkButton">
-                        <button class="btnStyle2" style="width: 130px; height: 50px;">Xuất</button>
+                        <button type="button" class="btnStyle2" style="width: 130px; height: 50px;">Xuất</button>
                     </a>
                 </div>
             </form>

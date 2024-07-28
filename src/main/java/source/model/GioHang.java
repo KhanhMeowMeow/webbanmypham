@@ -27,6 +27,7 @@ public class GioHang {
     private NguoiDung NguoiDung;
     
     private int SoLuongSanPham;
+    
     private double TongTien;
 
     @OneToMany(mappedBy = "GioHang")

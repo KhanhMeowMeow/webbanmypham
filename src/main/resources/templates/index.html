@@ -4,28 +4,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/cssindex.css">
+<link rel="stylesheet" href="/css/csstrangChu.css">
 <title>Trang chủ</title>
 </head>
 
 <body>
 <nav>
     <div class="layoutItemMenu">
-        <a href="/index"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+        <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
         <form action="#" class="formFind">
             <input type="text" placeholder="Tìm kiếm...">
             <button type="submit">Tìm kiếm</button>
         </form>
         <ul class="miniMenu">
-            <li><a href="/quanLySanPham">Quản lý</a></li>
-            <li><a href="/login">Tài khoản</a></li>
+            <li class="sup-menu admin" style="margin: 0; display: none;"><a>Quản lý</a>
+                <ul class="child-menu">
+                    <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
+                    <li><a href="">Quản lý người dùng</a></li>
+                    <li><a href="">Quản lý loại</a></li>
+                    <li class="sup-menu"><a href="">Thống kê</a>
+                        <ul class="child-menu">
+                            <li><a href="">Thống kê sản phẩm</a></li>
+                            <li><a href="">Thống kê doanh thu</a></li>
+                            <li><a href="">Thống kê giỏ hàng</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="sup-menu">
+                <a class="user">Tài khoản</a>
+                <a href="/login" class="noneuser">Đăng nhập</a>
+                <ul class="child-menu user">
+                    <li><a href="">Quản lý tài khoản</a></li>
+                    <li><a href="/submitLogout">Đăng xuất</a></li>
+                </ul>
+            </li>
             <li><a href="/gioHang">Giỏ hàng</a></li>
         </ul>
     </div>
+    <script th:inline="javascript">
+         /*<![CDATA[*/
+        var messVaitro =  /*[[${vaitro}]]*/"";
+        if (messVaitro == 'quanly') {
+            var elementAdmin = document.querySelectorAll('.admin');
+            elementAdmin.forEach(function(elementAdmin){
+                elementAdmin.style.display = '';
+            })
+        } else {
+            var elementAdmin = document.querySelectorAll('.admin');
+            elementAdmin.forEach(function(elementAdmin){
+                elementAdmin.style.display = 'none';
+            })
+        }
+
+        var messUser = /*[[${user}]]*/"";
+        if (messUser == 'yes') {
+            var elementUser = document.querySelectorAll('.user');
+            elementUser.forEach(function(elementUser){
+                elementUser.style.display = '';
+            })
+            var elementNoneUser = document.querySelectorAll('.noneuser');
+            elementNoneUser.forEach(function(elementNoneUser){
+                elementNoneUser.style.display = 'none';
+            })
+        } else {
+            var elementUser = document.querySelectorAll('.user');
+            elementUser.forEach(function(elementUser){
+                elementUser.style.display = 'none';
+            })
+            var elementNoneUser = document.querySelectorAll('.noneuser');
+            elementNoneUser.forEach(function(elementNoneUser){
+                elementNoneUser.style.display = '';
+            })
+        }
+        
+        
+        /*]]>*/
+
+    </script>
 </nav>
 <div class="container">
-    <div
-        style="background-color: white; height: 330px; display: flex; justify-content: center; align-items: center;">
+    <div style="background-color: white; height: 330px; display: flex; justify-content: center; align-items: center;">
         <h1 style="font-family: Asap Condensed;">Banner</h1>
     </div>
     
@@ -41,18 +100,18 @@
     <div style="margin-top: 20px;" class="container">
         <div class="listProducts">
             <p >Sản phẩm mới</p>
-            <div class="layOutProduct">
-                <a href="#" style="text-decoration: none; color: black;">
-                    <div class="product">
-                        <img src="/image/sanpham/sonKemMerzyAcademiaMellowTintAM1.jpeg" alt="">
+            <div class="layoutProduct">
+                <div class="product" th:each="sanPhamMoi : ${listSanPhamMoi}">
+                    <a th:href="@{|/chiTietSanPham?maSanPham=${sanPhamMoi.MaSanPham}|}">
+                        <img th:src="@{|/image/sanpham/${sanPhamMoi.HinhAnh}|}">
                         <div class="inforProduct">
-                            <p style="font-size: 15px;">Son kem Merzy Academia Mellow Tint AM1</p>
-                            <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;">
-                                1000000<span>đ</span></p>
-                            <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p>
-                        </div>
-                    </div>
-                </a>
+                            <p style="font-size: 15px;" th:text="${sanPhamMoi.TenSanPham}"></p>
+                            <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;" 
+                                th:text="${sanPhamMoi.getDonGiaDecimal() + 'đ'}"></p>
+                            <!-- <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p> -->
+                        </div>                                                                                
+                    </a>
+                </div>
             </div>
         </div>  
     </div>
@@ -65,7 +124,6 @@
 </body>
 <script>
 
-    
 </script>
 
 </html>

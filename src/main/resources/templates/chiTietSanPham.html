@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/csschiTietSanPham.css">
+<title>Chi tiết sản phẩm</title>
+</head>
+
+<body>
+<nav>
+<div class="layoutItemMenu">
+    <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+    <form action="#" class="formFind">
+        <input type="text" placeholder="Tìm kiếm...">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+    <ul class="miniMenu">
+        <li class="sup-menu admin" style="margin: 0;"><a>Quản lý</a>
+            <ul class="child-menu">
+                <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
+                <li><a href="">Quản lý người dùng</a></li>
+                <li><a href="">Quản lý loại</a></li>
+                <li class="sup-menu"><a href="">Thống kê</a>
+                    <ul class="child-menu">
+                        <li><a href="">Thống kê sản phẩm</a></li>
+                        <li><a href="">Thống kê doanh thu</a></li>
+                        <li><a href="">Thống kê giỏ hàng</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="sup-menu">
+            <a class="user">Tài khoản</a>
+            <a href="/login" class="noneuser">Đăng nhập</a>
+            <ul class="child-menu user">
+                <li><a href="">Quản lý tài khoản</a></li>
+                <li><a href="">Đăng xuất</a></li>
+            </ul>
+        </li>
+        <li><a href="/gioHang">Giỏ hàng</a></li>
+    </ul>
+</div>
+<script>
+    var elementAdmin = document.querySelectorAll('.admin');
+    elementAdmin.forEach(function (elementAdmin) {
+        elementAdmin.style.display = 'none';
+    })
+
+    var elementUser = document.querySelectorAll('.user');
+    elementUser.forEach(function (elementUser) {
+        elementUser.style.display = 'none';
+    })   
+</script>
+</nav>
+<div class="container" th:object="${sanPham}">
+    <div class="productContent">
+        <img th:src="@{|/image/sanpham/*{HinhAnh}|}">
+        <div class="inforProductContent">
+            <p th:text="*{TenSanPham}" class="nameProduct"></p>
+            <p th:text="*{getDonGiaDecimal()} + 'đ'" class="priceProduct"></p>
+            <div class="listButton">
+                <a th:href="@{|/themGioHang?maSanPham=*{MaSanPham}|}"><button class="btnStyle2 button">Thêm giỏ hàng</button></a>
+                <a th:href="@{|/muaNgay?maSanPham=*{MaSanPham}|}" style="display: none;"><button class="btnStyle1 button">Mua ngay</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="contentProduct">
+        <p class="textBassic title">Mô tả:</p>
+        <textarea class="content" th:text="*{MoTa}"></textarea>
+    </div>
+    <div class="listProducts">
+        <p >Bạn có thể thích</p>
+        <div class="layoutProduct">
+            <div class="product" th:each="sanPhamMoi : ${listSanPhamBanCoTheThich}">
+                <a th:href="@{|/chiTietSanPham?maSanPham=${sanPhamMoi.MaSanPham}|}">
+                    <img th:src="@{|/image/sanpham/${sanPhamMoi.HinhAnh}|}">
+                    <div class="inforProduct">
+                        <p style="font-size: 15px;" th:text="${sanPhamMoi.TenSanPham}"></p>
+                        <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;" 
+                            th:text="${sanPhamMoi.getDonGiaDecimal() + 'đ'}"></p>
+                        <!-- <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p> -->
+                    </div>                                                                                
+                </a>
+            </div>
+        </div>
+    </div>  
+</div>
+</body>
+
+</html>

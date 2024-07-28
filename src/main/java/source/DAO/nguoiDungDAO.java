@@ -17,7 +17,7 @@ public class NguoiDungDAO {
         return nguoiDungRepository.save(nguoiDung);
     }
 
-    public NguoiDung timTheoTenNgoiDung(String MaNguoiDung){
+    public NguoiDung timTheoMaNgoiDung(String MaNguoiDung){
         return nguoiDungRepository.findById(MaNguoiDung).orElse(null);
     }
 

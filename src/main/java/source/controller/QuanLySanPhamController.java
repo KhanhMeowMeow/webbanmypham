@@ -13,49 +13,85 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.validation.Valid;
+import source.DAO.LoaiSanPhamDAO;
 import source.DAO.SanPhamDAO;
+import source.model.LoaiSanPham;
 import source.model.SanPham;
 
 @Controller
 public class QuanLySanPhamController {
     @Autowired
     private SanPhamDAO sanPhamDAO;
+    @Autowired
+    private LoaiSanPhamDAO loaiSanPhamDAO;
     
     @GetMapping("/quanLySanPham")
     public String getQuanLySanPham(Model model) {
-        List<SanPham> listSanPham = sanPhamDAO.timTatCaSanPham();
         model.addAttribute("SanPham", new SanPham());
-        model.addAttribute("listSanPham", listSanPham);
         return "quanLySanPham";
     }
+
+    @ModelAttribute("listLoaiSanPham")
+    public List<LoaiSanPham> listLoaiSanPham(){
+        return loaiSanPhamDAO.timTatCaLoaiSanPham();
+    }
+
+    @ModelAttribute("listSanPham")
+    public List<SanPham> listSanPham() {
+        return sanPhamDAO.timTatCaSanPham();
+    }
+
     
     @RequestMapping("/quanLySanPham/them")
-    public String requestThemSanPham(@ModelAttribute("SanPham") SanPham sanPham, 
+    public ModelAndView requestThemSanPham(@ModelAttribute("SanPham") @Valid SanPham sanPham ,
+                                    BindingResult result, 
                                     Model model,
-                                    @RequestParam("fileImage") MultipartFile multipartFile) {
+                                    @RequestParam("fileImage") MultipartFile multipartFile,
+                                    @RequestParam("LoaiSanPham") String maLoaiSanPham ){
         String fileName = "";
         String partFile = "src/main/resources/static/image/sanpham/";
 
+
         fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         saveFile(partFile, fileName, multipartFile);
+        LoaiSanPham loaiSanPham = loaiSanPhamDAO.timTheoMaLoaiSanPham(maLoaiSanPham);
+
         sanPham.setHinhAnh(fileName);
+        sanPham.setLoaiSanPham(loaiSanPham);
+
+        if (result.hasErrors()) {
+            return new ModelAndView("quanLySanPham").addObject("SanPham", sanPham);
+        }
+        
+        if (loaiSanPham == null) {
+            model.addAttribute("messLoaiSanPham", "Thiếu loại sản phẩm");
+            return new ModelAndView("quanLySanPham").addObject("SanPham", sanPham);
+        }
+
+        if (fileName.equals("")) {
+            model.addAttribute("mestHinhAnh", "Bạn chưa chọn hình ảnh sản phẩm");
+            return new ModelAndView("quanLySanPham").addObject("SanPham", sanPham);
+        }
 
         sanPhamDAO.themSanPham(sanPham);
         model.addAttribute("messQuanLySanPham", "Thêm sản phẩm thành công");
-        return "redirect:/quanLySanPham";
+        return new ModelAndView("redirect:/quanLySanPham");
     }
     
     @RequestMapping("/quanLySanPham/chon")
     public String requestChonSanPham(Model model,@RequestParam("MaSanPham") String MaSanPham) {
-        model.addAttribute("SanPham", sanPhamDAO.timSanPhamTheoTen(MaSanPham));
+        model.addAttribute("SanPham", sanPhamDAO.timSanPhamTheoMaSanPham(MaSanPham));
         model.addAttribute("listSanPham", sanPhamDAO.timTatCaSanPham());
-        return "/quanLySanPham";
+        return "/quanLySanPham";    
     }
 
     @RequestMapping("/quanLySanPham/xoa")
@@ -81,4 +117,5 @@ public class QuanLySanPhamController {
             System.out.println("Lỗi lưu file trên server: " + e);
         }
     }
+
 }

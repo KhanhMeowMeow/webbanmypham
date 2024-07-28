@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssGioHang.css">
+    <title>Giỏ hàng</title>
+</head>
+<body>
+    <nav>
+        <div class="layoutItemMenu">
+            <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+            <form action="#" class="formFind">
+                <input type="text" placeholder="Tìm kiếm...">
+                <button type="submit">Tìm kiếm</button>
+            </form>
+            <ul class="miniMenu">
+                <li class="sup-menu admin" style="margin: 0;"><a>Quản lý</a>
+                    <ul class="child-menu">
+                        <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
+                        <li><a href="">Quản lý người dùng</a></li>
+                        <li><a href="">Quản lý loại</a></li>
+                        <li class="sup-menu"><a href="">Thống kê</a>
+                            <ul class="child-menu">
+                                <li><a href="">Thống kê sản phẩm</a></li>
+                                <li><a href="">Thống kê doanh thu</a></li>
+                                <li><a href="">Thống kê giỏ hàng</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sup-menu">
+                    <a class="user">Tài khoản</a>
+                    <a href="/login" class="noneuser">Đăng nhập</a>
+                    <ul class="child-menu user">
+                        <li><a href="">Quản lý tài khoản</a></li>
+                        <li><a href="">Đăng xuất</a></li>
+                    </ul>
+                </li>
+                <li><a href="/gioHang">Giỏ hàng</a></li>
+            </ul>
+        </div>
+        <script>
+            var elementAdmin = document.querySelectorAll('.admin');
+            elementAdmin.forEach(function(elementAdmin){
+                elementAdmin.style.display = 'none';
+            })
+    
+            var elementUser = document.querySelectorAll('.user');
+            elementUser.forEach(function(elementUser){
+                elementUser.style.display = 'none';
+            })
+        </script>
+    </nav>
+    <div class="container">
+        <div>
+            <p th:text="${messGioHang}" style="margin: 0; padding: 0; font-size: 40px; color: var(--color_main4);"></p>
+        </div>
+        <div class="cartTitle">
+            <div class="chose">
+                <input type="checkbox" id="selectAll">
+                <label for="choseAll">Chọn tất cả</label>
+            </div>
+            <div class="buy">
+                <p>Tổng tiền: <span>1000000đ</span></p>
+                <a href="">
+                    <button class="btnStyle1 btnBuy">Đặt hàng</button>
+                </a>
+            </div>
+        </div>
+        <div class="listProduct">
+            <div class="productItem" th:each="sanPham : ${listSanPhamTrongGioHang}">
+                <div class="chose">
+                    <input type="checkbox" class="selectItem">
+                    <label>Chọn</label>
+                </div>
+                <div class="inforProductItem">
+                    <img th:src="@{|image/sanpham/${sanPham.HinhAnh}|}">
+                    <div class="textInforProductItem">
+                        <p style="color: black">Tên sản phẩm</p>
+                        <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice">120000đ</span></p>
+                    </div>
+                </div>
+                <div class="quanlityProductItem">
+                    <button class="btnStyle4 ">-</button>
+                    <input type="number" value="0" readonly >
+                    <button class="btnStyle4">+</button>
+                </div>
+                <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;">1000000đ</p>
+                <a href="" style="height: 149px;">
+                    <button class="btnStyle4 btnDelete">Xóa</button>
+                </a>
+            </div>
+        </div>
+        <script>
+            var allItem = document.getElementById('selectAll');
+            var listItem = document.querySelectorAll('.selectItem');
+
+            allItem.addEventListener('change', function(){
+                    listItem.forEach(item => item.checked = this.checked)
+            });
+
+            listItem.forEach(item => {
+                item.addEventListener('change', function(){
+                    if (Array.from(listItem).some(itm => !itm.checked)) {
+                        allItem.checked = false;
+                    } else {
+                        allItem.checked = true;
+                    }
+                });
+            });
+            document.querySelectorAll('.productItem').forEach(product => {
+
+            })
+        </script>
+    </div>
+</body>
+</html>
