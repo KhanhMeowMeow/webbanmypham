@@ -19,6 +19,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "GioHang")
 public class GioHang {
+    
+
     @Id
     private String MaGioHang;
     
@@ -32,4 +34,5 @@ public class GioHang {
 
     @OneToMany(mappedBy = "GioHang")
     private Set<GioHangChiTiet> GioHangChiTiets;
+
 }

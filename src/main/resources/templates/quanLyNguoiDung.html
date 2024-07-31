@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssquanLyNguoiDung.css">
+    <title>Quản lý người dùng</title>
+</head>
+<body>
+    <nav th:replace="~{/menu.html}"></nav>
+    <div class="container">
+        <div class="backGroundThemXoaSua">
+            <form th:action="@{/quanLyNguoiDung/them}" th:object="${NguoiDung}" enctype="multipart/form-data" method="post">
+                <div class="rowInput">
+                    <div class="columInput">
+                        <div class="moduleInput">
+                            <label for="MaNguoiDung">Mã người dùng</label>
+                            <input type="text" name="MaNguoiDung" class="input" th:field="*{MaNguoiDung}"> 
+                            <div class="errorOutline">
+                                <p class="error" th:if="${#fields.hasErrors('MaNguoiDung')}" th:errors="*{MaNguoiDung}"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="MatKhau">Mật khẩu</label>
+                            <input type="text" name="MatKhau" class="input" th:field="*{MatKhau}"> 
+                            <div class="errorOutline">
+                                <p class="error" ></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="TenNguoiDung">Tên người dùng</label>
+                            <input type="text" name="TenNguoiDung" class="input" th:field="*{TenNguoiDung}"> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="SoDienThoai">Số điện thoại</label>
+                            <input type="text" name="SoDienThoai" class="input" th:field="*{SoDienThoai}"> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columInput">
+                        <div class="moduleInput">
+                            <label>Vai trò</label>
+                            <div class="vaiTroStyle">
+                                <label><input type="radio" name="VaiTro" th:value="true" th:checked="*{VaiTro}"> Quản lý</label>
+                                <label><input type="radio" name="VaiTro" th:value="false" th:checked="*{!VaiTro}"> Khách hàng</label>
+                            </div>
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="DiaChi">Địa chỉ</label>
+                            <input type="text" name="DiaChi" class="input" th:field="*{DiaChi}"> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="Email">Email</label>
+                            <input type="text" name="Email" class="input" th:field="*{Email}"> 
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rowButton">
+                    <button type="submit" class="btnStyle2" style="width: 130px; height: 50px;">Thêm</button>
+                    <a th:href="@{|/quanLyNguoiDung/xoa?MaNguoiDung=*{MaNguoiDung}|}" class="linkButton">
+                        <button type="button" class="btnStyle2" style="width: 130px; height: 50px;">Xóa</button>
+                    </a>
+                    <a th:href="@{/quanLyNguoiDung}" class="linkButton">
+                        <button type="button" class="btnStyle2" style="width: 130px; height: 50px;">Mới</button>
+                    </a>
+                    <a href="#" class="linkButton">
+                        <button type="button" class="btnStyle2" style="width: 130px; height: 50px;">Xuất</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 20px">
+            <div style="display: flex; justify-content: center;">
+                <form action="#" class="formFind">
+                    <input type="text" placeholder="Tìm kiếm...">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+            
+            <div class="titleList">
+                <div>
+                    <p>Mã người dùng</p>
+                    <p>Tên người dùng</p>
+                    <p>Số điện thoại</p>
+                    <p>Email</p>
+                    <p>Địa chỉ</p>
+                </div>
+            </div>
+            <ul class="list" style="max-height: 740px;">
+                <li class="userItem" th:each="nguoiDung : ${listNguoiDung}">
+                    <a th:href="@{|/quanLyNguoiDung/chon?MaNguoiDung=${nguoiDung.MaNguoiDung}|}" class="textBassic">
+                        <button class="btnUserItem" style="background-color: var(--color_main); color: white;">Chọn</button>
+                    </a>
+                    <div class="inforUser">
+                        <p th:text="${nguoiDung.MaNguoiDung}"></p>
+                        <p th:text="${nguoiDung.TenNguoiDung}"></p>
+                        <p th:text="${nguoiDung.SoDienThoai}"></p>
+                        <p th:text="${nguoiDung.Email}"></p>
+                        <p th:text="${nguoiDung.DiaChi}"></p>
+                    </div>
+                    <a th:href="@{|/quanLyNguoiDung/xoa?MaNguoiDung=${nguoiDung.MaNguoiDung}|}" class="textBassic">
+                        <button class="btnUserItem" style="background-color: var(--color_main2); color: var(--color_main);">Xóa</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

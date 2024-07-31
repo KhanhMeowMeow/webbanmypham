@@ -47,7 +47,7 @@ public class QuanLySanPhamController {
 
     @ModelAttribute("listSanPham")
     public List<SanPham> listSanPham() {
-        return sanPhamDAO.timTatCaSanPham();
+        return sanPhamDAO.timSanPhamOn();
     }
 
     
@@ -65,6 +65,7 @@ public class QuanLySanPhamController {
         saveFile(partFile, fileName, multipartFile);
         LoaiSanPham loaiSanPham = loaiSanPhamDAO.timTheoMaLoaiSanPham(maLoaiSanPham);
 
+        sanPham.setTrangThai(true);;
         sanPham.setHinhAnh(fileName);
         sanPham.setLoaiSanPham(loaiSanPham);
 
@@ -90,13 +91,15 @@ public class QuanLySanPhamController {
     @RequestMapping("/quanLySanPham/chon")
     public String requestChonSanPham(Model model,@RequestParam("MaSanPham") String MaSanPham) {
         model.addAttribute("SanPham", sanPhamDAO.timSanPhamTheoMaSanPham(MaSanPham));
-        model.addAttribute("listSanPham", sanPhamDAO.timTatCaSanPham());
+        model.addAttribute("listSanPham", sanPhamDAO.timSanPhamOn());
         return "/quanLySanPham";    
     }
 
     @RequestMapping("/quanLySanPham/xoa")
     public String requestXoaSanPham(Model model,@RequestParam("MaSanPham") String MaSanPham) {
-        sanPhamDAO.xoaSanPham(MaSanPham);
+        SanPham sanPham = sanPhamDAO.timSanPhamTheoMaSanPham(MaSanPham);
+        sanPham.setTrangThai(false);
+        sanPhamDAO.themSanPham(sanPham);
         return "redirect:/quanLySanPham";
     }
 

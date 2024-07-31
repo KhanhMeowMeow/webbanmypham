@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssMenuSanPham.css">
+    <title>Danh mục sản phẩm</title>
+</head>
+
+<body>
+    <nav th:replace="~{/menuFind.html}"></nav>
+    <div class="container">
+        <ul class="menu2">
+            <li><a href="#">Cá nhân</a></li>
+            <li><a href="#">Cơ thể</a></li>
+            <li><a href="#">Da mặt</a></li>
+            <li><a href="#">Làm đẹp</a></li>
+            <li><a href="#">Tóc</a></li>
+            <li><a href="#">Nước hoa</a></li>
+        </ul>
+
+        <div class="layoutMenu">
+            <div style="width: 232px;">
+                
+            </div>
+            <div class="listProducts">
+                <div class="layoutProduct">
+                    <div class="product" th:each="sanPham : ${listSanPham}">
+                        <a th:href="@{|/chiTietSanPham?maSanPham=${sanPham.MaSanPham}|}">
+                            <img th:src="@{|/image/sanpham/${sanPham.HinhAnh}|}">
+                            <div class="inforProduct">
+                                <p style="font-size: 15px;" th:text="${sanPham.TenSanPham}"></p>
+                                <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;"
+                                    th:text="${sanPham.getDonGiaDecimal() + 'đ'}"></p>
+                                <!-- <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

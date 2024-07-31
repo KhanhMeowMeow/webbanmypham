@@ -9,7 +9,8 @@ CREATE Table NguoiDung (
     VaiTro BIT not null,
     Email Nvarchar(100),
     SoDienThoai VARCHAR(12),
-    DiaChi Nvarchar(200)
+    DiaChi Nvarchar(200),
+    TrangThai bit,
 )
 
 CREATE TABLE GioHang (
@@ -34,7 +35,8 @@ CREATE Table SanPham (
     LoaiSanPham Nvarchar(10),
     MauSac Nvarchar(max),
     MoTa Nvarchar(max),
-    DonGia Float
+    DonGia Float,
+    TrangThai bit
 )
 
 CREATE TABLE LoaiSanPham (
@@ -120,11 +122,21 @@ SELECT * FROM GioHangChiTiet
 SELECT * FROM GioHang
 
 
-SELECT GioHangChiTiet.SanPham, GioHangChiTiet.SoLuong From GioHangChiTiet 
+SELECT * From GioHangChiTiet 
 INNER JOIN GioHang 
 on GioHang.MaGioHang =  GioHangChiTiet.GioHang
 WHERE GioHang.NguoiDUng = 'ND001'
 
 SELECT * From GioHang WHERE GioHang.NguoiDung = 'ND001'
 
-Select SanPham from GioHangChiTiet WHERE GioHang = 'GH_ND001'
+Select * from GioHangChiTiet WHERE GioHang = 'GH_ND001'
+
+DELETE FROM GioHangChiTiet where GioHang in (Select MaGioHang From GioHang where MaNguoiDung = 'ND003')
+
+INSERT INTO NguoiDung VALUES
+('ND003', '1111111', N'Nguyễn An Bình', 0, 'abc@gmail.com', '0987654321', N'Quận12')
+
+INSERT INTO GioHang VALUES
+('GH_ND003', 'ND003', 0, 0)
+
+SELECT * from NguoiDung where TrangThai = 1

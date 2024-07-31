@@ -1,0 +1,66 @@
+@import url('/css/cssindex.css');
+
+.menu2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--color_main2);
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+.menu2 a {
+    color: var(--color_main);
+    font-weight: bold;
+}
+
+.layoutMenu {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 1200px;
+    
+}
+
+.listProducts {
+    width: 966px;
+}
+
+.listProducts>p {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    color: var(--color_main4);
+    font-size: 25px;
+    height: 29px;
+}
+
+.layoutProduct {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 966px;
+}
+
+.product {
+    width: 232px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.product img{
+    width: 204px;
+    height: 204px;
+    margin: 14px 14px 0 14px;
+}
+
+.inforProduct{
+    margin: 5px 14px 14px 14px;
+}
+
+.inforProduct > p{
+    margin: 0;
+    padding: 0;
+}

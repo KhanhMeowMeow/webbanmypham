@@ -33,72 +33,110 @@
     </style>
 </head>
 <body>
-    <div class="cart">
-        <div class="cart-item">
-            <div class="item-name">Sản phẩm 1</div>
-            <p class="unit-price">Đơn giá: 100,000 VND</p>
-            <p class="total-price">Tổng giá: 100,000 VND</p>
-            <div class="quantity">
-                <button class="decrease">-</button>
-                <input type="number" class="quantity-input" value="1" min="1">
-                <button class="increase">+</button>
+    <div class="listProduct">
+        <div class="productItem itemInListCart" th:each="sanPham : ${listSanPhamTrongGioHang}">
+            <div class="chose">
+                <input type="checkbox" class="selectItem">
+                <label>Chọn</label>
             </div>
-        </div>
-        <div class="cart-item">
-            <div class="item-name">Sản phẩm 2</div>
-            <p class="unit-price">Đơn giá: 150,000 VND</p>
-            <p class="total-price">Tổng giá: 150,000 VND</p>
-            <div class="quantity">
-                <button class="decrease">-</button>
-                <input type="number" class="quantity-input" value="1" min="1">
-                <button class="increase">+</button>
+            <div class="inforProductItem">
+                <img th:src="@{|image/sanpham/${sanPham.HinhAnh}|}">
+                <div class="textInforProductItem">
+                    <p style="color: black">Tên sản phẩm</p>
+                    <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice" th:text="${sanPham.getDonGiaDecimal()}"></span></p>
+                </div>
             </div>
+            <div class="quanlityProductItem">
+                <button class="btnStyle4 dec">-</button>
+                <input type="number" value="1" readonly class="quantity">
+                <button class="btnStyle4 inc">+</button>
+            </div>
+            <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;"></p>
+            <a href="" style="height: 149px;">
+                <button class="btnStyle4 btnDelete">Xóa</button>
+            </a>
         </div>
-        <!-- Thêm các sản phẩm khác tương tự -->
     </div>
+    <p id="totalCartPrice" style="font-weight: bold; font-size: 32px;">Tổng giá giỏ hàng: 0 VND</p>
+    
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const allItem = document.getElementById('selectAll');
+    const listItem = document.querySelectorAll('.selectItem');
+    const totalCartPriceElement = document.getElementById('totalCartPrice');
 
-    <script>
-        document.querySelectorAll('.cart-item').forEach(item => {
-            const decreaseButton = item.querySelector('.decrease');
-            const increaseButton = item.querySelector('.increase');
-            const quantityInput = item.querySelector('.quantity-input');
-            const unitPriceElement = item.querySelector('.unit-price');
-            const totalPriceElement = item.querySelector('.total-price');
+    function updateTotalCartPrice() {
+        let totalCartPrice = 0;
 
-            // Hàm để cập nhật tổng giá
-            function updateTotalPrice() {
-                // Lấy đơn giá từ thẻ p
-                const unitPrice = parseFloat(unitPriceElement.textContent.replace('Đơn giá: ', '').replace(' VND', '').replace(/,/g, ''));
-                // Lấy số lượng từ input
+        document.querySelectorAll('.itemInListCart').forEach(item => {
+            const selectItem = item.querySelector('.selectItem');
+            const quantityInput = item.querySelector('.quantity');
+            const unitPriceElement = item.querySelector('.unitPrice');
+            const totalPriceElement = item.querySelector('.totalPrice');
+
+            if (selectItem.checked) {
+                const unitPrice = parseFloat(unitPriceElement.textContent.replace(/,/g, ''));
                 const quantity = parseInt(quantityInput.value, 10);
-                // Tính tổng giá
                 const totalPrice = unitPrice * quantity;
-                // Cập nhật thẻ p chứa tổng giá
-                totalPriceElement.textContent = `Tổng giá: ${totalPrice.toLocaleString()} VND`;
+                totalPriceElement.textContent = `${totalPrice.toLocaleString()} VND`;
+                totalCartPrice += totalPrice;
+            } else {
+                totalPriceElement.textContent = '0 VND';
             }
+        });
 
-            // Lắng nghe sự kiện click trên nút giảm
-            decreaseButton.addEventListener('click', () => {
-                let currentQuantity = parseInt(quantityInput.value, 10);
-                if (currentQuantity > 1) {
-                    quantityInput.value = currentQuantity - 1;
-                    updateTotalPrice();
-                }
-            });
+        totalCartPriceElement.textContent = `Tổng giá giỏ hàng: ${totalCartPrice.toLocaleString()} VND`;
+    }
 
-            // Lắng nghe sự kiện click trên nút tăng
-            increaseButton.addEventListener('click', () => {
-                let currentQuantity = parseInt(quantityInput.value, 10);
-                quantityInput.value = currentQuantity + 1;
+    allItem.addEventListener('change', function() {
+        listItem.forEach(item => item.checked = this.checked);
+        updateTotalCartPrice();
+    });
+
+    listItem.forEach(item => {
+        item.addEventListener('change', function() {
+            if (Array.from(listItem).some(itm => !itm.checked)) {
+                allItem.checked = false;
+            } else {
+                allItem.checked = true;
+            }
+            updateTotalCartPrice();
+        });
+    });
+
+    document.querySelectorAll('.itemInListCart').forEach(item => {
+        const decreaseButton = item.querySelector('.dec');
+        const increaseButton = item.querySelector('.inc');
+        const quantityInput = item.querySelector('.quantity');
+        const unitPriceElement = item.querySelector('.unitPrice');
+        const totalPriceElement = item.querySelector('.totalPrice');
+
+        function updateTotalPrice() {
+            const unit = parseFloat(unitPriceElement.textContent.replace(/,/g, ''));
+            const quantity = parseInt(quantityInput.value, 10);
+            const total = unit * quantity;
+            totalPriceElement.textContent = `${total.toLocaleString()} VND`;
+            updateTotalCartPrice(); // Cập nhật tổng giỏ hàng sau khi thay đổi số lượng
+        }
+
+        decreaseButton.addEventListener('click', () => {
+            let quantity = parseInt(quantityInput.value, 10);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
                 updateTotalPrice();
-            });
+            }
+        });
 
-            // Lắng nghe sự kiện change trên input số lượng
-            quantityInput.addEventListener('change', updateTotalPrice);
-
-            // Cập nhật tổng giá khi tải trang lần đầu
+        increaseButton.addEventListener('click', () => {
+            let quantity = parseInt(quantityInput.value, 10);
+            quantityInput.value = quantity + 1;
             updateTotalPrice();
         });
-    </script>
-</body>
+
+        updateTotalPrice(); // Cập nhật giá tổng khi tải trang
+    });
+});
+
+</script>
 </html>

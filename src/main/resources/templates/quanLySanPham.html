@@ -8,29 +8,7 @@
     <title>Quản lý sản phẩm</title>
 </head>
 <body>
-    <nav>
-        <div class="layoutItemMenu">
-            <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
-            <ul class="miniMenu">
-                <li class="sup-menu"><a>Quản lý</a>
-                    <ul class="child-menu">
-                        <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
-                        <li><a href="">Quản lý người dùng</a></li>
-                        <li><a href="">Quản lý loại</a></li>
-                        <li class="sup-menu"><a href="">Thống kê</a>
-                            <ul class="child-menu">
-                                <li><a href="">Thống kê sản phẩm</a></li>
-                                <li><a href="">Thống kê doanh thu</a></li>
-                                <li><a href="">Thống kê giỏ hàng</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="/login">Tài khoản</a></li>
-                <li><a href="/gioHang">Giỏ hàng</a></li>
-            </ul>
-        </div>
-    </nav>
+    <nav th:replace="~{/menu.html}"></nav>
     <div class="container">
         <div class="backGroundThemXoaSua">
             <form th:action="@{/quanLySanPham/them}" th:object="${SanPham}" enctype="multipart/form-data" method="post">
@@ -68,20 +46,18 @@
                     <div class="columInput">
                         <div class="moduleInput">
                             <label for="HinhSanPham">Hình sản phẩm</label>
-                            <div style="display: flex; flex-direction: row;">
-                                <div style="display: flex;">
-                                    
+                            <div style="display: flex; align-items: flex-start;">
+                                <div style="height: 139px; width: 139px; background-color: var(--color_main2);">
+                                    <img th:src="@{|/image/sanpham/*{HinhAnh}|}" id="hinhSanPham"  style="width: 100%; height: 100%; border: none;">
                                 </div>
-                                <label>
-                                    <input id="inputHinhSanPham" type="file" class="input" name="fileImage" style="height: 20px;" th:value="*{HinhAnh}"> 
-                                </label>
-                            </div>
-    
-                            <div style="display: flex; flex-direction: row;">
-                                <div style="height: 109px; width: 109px; background-color: var(--color_main2); margin-top: 5px;">
-                                    <img th:src="@{|/image/sanpham/*{HinhAnh}|}" id="hinhSanPham"  style="width: 100%; height: 100%;">
+                                <div style="display: flex; flex-direction: row; margin-left: 5px;">
+                                    <div style="display: flex;">
+                                        
+                                    </div>
+                                    <label class="inputFileOutline">
+                                        <input id="inputHinhSanPham" type="file" class="inputFile" name="fileImage" th:value="*{HinhAnh}"> 
+                                    </label>
                                 </div>
-                                <button class="btnStyle3" style="margin: 5px 0 0 5px; height: 33px; width: 71px; display: none;">Xóa</button>
                             </div>
                             
                             <div class="errorOutline">
@@ -97,7 +73,7 @@
                         </div>
                         <div class="moduleInput">
                             <label for="LoaiSanPham">Loại sản phẩm</label>
-                            <select name="LoaiSanPham" class="input" style="width: 570px;">
+                            <select name="LoaiSanPham" class="input select">
                                 <option th:each="loaiSanPham : ${listLoaiSanPham}" 
                                         th:text="${loaiSanPham.getTenLoaiSanPham()}" 
                                         th:value="${loaiSanPham.getMaLoaiSanPham()}"></option>
@@ -115,7 +91,7 @@
                 
                 <div class="moduleInput" style="margin-left: 20px;">
                     <label for="MoTa">Mô tả</label>
-                    <textarea name="MoTa" class="input" style="height: 200px; width: 1130px;" th:field="*{MoTa}"></textarea>
+                    <textarea name="MoTa" class="input" style="height: 230px; width: 1130px;" th:field="*{MoTa}"></textarea>
                 </div>
 
                 <div class="rowButton">
@@ -132,7 +108,7 @@
                 </div>
             </form>
         </div>
-        <div style="margin-top: 20px">
+        <div style="margin-top: 30px">
             <div style="display: flex; justify-content: center;">
                 <form action="#" class="formFind">
                     <input type="text" placeholder="Tìm kiếm...">
@@ -142,26 +118,24 @@
             
             <div class="titleList">
                 <div>
-                    <p style="width: 120px;">Hình</p>
-                    <p style="width: 266px;">Tên sản phẩm</p>
-                    <p style="width: 150px;">Đơn giá</p>
-                    <p style="width: 100px;">Số lượng</p>
+                    <p style="margin-right: 70px;">Mã sản phẩm</p>
+                    <p style="margin-right: 180px;">Hình</p>
+                    <p style="margin-right: 210px;">Tên sản phẩm</p>
+                    <p style="margin-right: 70px;">Đơn giá</p>
+                    <p>Số lượng</p>
                 </div>
             </div>
-            <ul class="list" style="max-height: 500px;">
+            <ul class="list" style="max-height: 740px;">
                 <li class="productItemLayout" th:each="sanpham : ${listSanPham}">
                     <a th:href="@{|/quanLySanPham/chon?MaSanPham=${sanpham.MaSanPham}|}" class="textBassic">
                         <button class="btnProductItem" style="background-color: var(--color_main); color: white;">Chọn</button>
                     </a>
                     <div class="inforProduct">
-                        <img th:src="@{|/image/sanpham/${sanpham.HinhAnh}|}" alt="Hình sản phẩm" width="120px" height="120px">
-                        <div style="height: 100%; width: 266px;">
-                            <p class="textBassic" style="font-size: 25px;" th:text="${sanpham.TenSanPham}"></p>
-                        </div>
-                        <p style="font-size: 25px; color: var(--color_main);" th:text="${sanpham.getDonGiaDecimal()}"></p>
-                        <div style="background-color: var(--color_main3); height: 32px; width: 100px; display: flex; justify-content: center; align-items: center;">
-                            <p style="font-size: 25px;" class="textBassic" th:text="${sanpham.SoLuong}"></p>
-                        </div>
+                        <p th:text="${sanpham.MaSanPham}"></p>
+                        <img th:src="@{|/image/sanpham/${sanpham.HinhAnh}|}" width="75px" height="75px">
+                        <p style="width: 272px;" th:text="${sanpham.TenSanPham}"></p>
+                        <p style="color: var(--color_main);" th:text="${sanpham.getDonGiaDecimal()}"></p>
+                        <p th:text="${sanpham.SoLuong}"></p>
                     </div>
                     <a th:href="@{|/quanLySanPham/xoa?MaSanPham=${sanpham.MaSanPham}|}" class="textBassic">
                         <button class="btnProductItem" style="background-color: var(--color_main2); color: var(--color_main);">Xóa</button>
@@ -171,17 +145,19 @@
         </div>
     </div>
 </body>
+
 <script>
-    
-    const fileInput = document.getElementById('inputHinhSanPham');
-    const imagePreview = document.getElementById('hinhSanPham');
-    fileInput.addEventListener('change', function(){
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(event){
-            imagePreview.src = event.target.result;
+    var inputHinhSanPham = document.getElementById('inputHinhSanPham');
+    inputHinhSanPham.addEventListener('change', function(event){
+        const file = event.target.files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = function(e){
+                const hinhSanPham = document.getElementById('hinhSanPham');
+                hinhSanPham.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
-        reader.readAsDataURL(file);
     });
 </script>
 </html>

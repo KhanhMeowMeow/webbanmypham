@@ -1,5 +1,6 @@
 package source.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,28 +28,26 @@ public class IndexController {
     private NguoiDungDAO nguoiDungDAO;
 
     @GetMapping("/")
-    public String getIndex(Model model) {
-        String usersession = "";
-        
-        if (session.getAttribute("idUser") != null) {
-            usersession = (String) session.getAttribute("idUser");
-        }
-
-        session.setAttribute("idUser", "ND001");
-
-        NguoiDung nguoiDung = nguoiDungDAO.timTheoMaNgoiDung(usersession);
-        if (nguoiDung != null) {
-            if (nguoiDung.isVaiTro()) {
-                model.addAttribute("vaitro", "quanly");
-            } else {
-                model.addAttribute("vaitro", "khachhang");
-            }
-            model.addAttribute("user", "yes");
-        } else {
-            model.addAttribute("user", "none");
-        }
-        
+    public String getIndex() {
         return "index";
+    }
+
+    @GetMapping("/timSanPham")
+    public String getTimSanPham(@RequestParam(name = "textFind", defaultValue = "", required = false) String tenSanPham,
+                                Model model) {
+        if (tenSanPham.equals("")) {
+            return "redirect:/";
+        }
+        List<SanPham> listSanPham = sanPhamDAO.timSanPhamOn();
+        Iterator<SanPham> inIterator = listSanPham.iterator();
+        while (inIterator.hasNext()) {
+            SanPham item = inIterator.next();
+            if (!item.getTenSanPham().toLowerCase().contains(tenSanPham.toLowerCase())) {
+                inIterator.remove();
+            }
+        }
+        model.addAttribute("listSanPham", listSanPham);
+        return "/danhMucSanPham";
     }
 
     @GetMapping("/login")
@@ -58,18 +57,15 @@ public class IndexController {
 
     @ModelAttribute("listSanPhamMoi")
     public List<SanPham> list8SanPhamMoi(){
-
         List<SanPham> allSanPham = sanPhamDAO.timSanPhamMoi();
-
         return allSanPham.size() > 8 ? allSanPham.subList(0, 10) : allSanPham;
-
     }
 
     @RequestMapping("/submitLogin")
     public String submitLogin(@RequestParam("TenDangNhap") String idNguoiDung,
                             @RequestParam("MatKhau") String matKhau, 
                             Model model) {
-        List<NguoiDung> nguoiDungs = nguoiDungDAO.timTatCaNgoiDung();
+        List<NguoiDung> nguoiDungs = nguoiDungDAO.timTatCaNgoiDungHoatDong();
         NguoiDung existingUser = null;
         for (NguoiDung nguoiDung : nguoiDungs) {
             if (nguoiDung.getMaNguoiDung().equals(idNguoiDung)) {
@@ -83,7 +79,7 @@ public class IndexController {
             session.setAttribute("idUser", idNguoiDung);
             model.addAttribute("messLogin", "Đăng nhập thành công!");
             return "redirect:/";
-        } else {
+        }else{
             model.addAttribute("messLogin", "Sai tên đăng nhập hoặc mật khẩu!");
             return "login";
         }
@@ -94,6 +90,4 @@ public class IndexController {
         session.removeAttribute("idUser");
         return "login";
     }
-
-    
 }

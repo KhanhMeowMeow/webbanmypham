@@ -19,6 +19,11 @@ public class GioHangDAO {
         return gioHangRepository.findByMaNguoiDung(maNguoiDung);
     }
 
+    public GioHang taoGioHang(GioHang gioHang){
+        return gioHangRepository.save(gioHang);
+    }
+    
+
     // public List<GioHang> timGioHangTheoNguoiDung(NguoiDung maNguoiDung){
     //     return gioHangRepository.findByNguoiDung(maNguoiDung);
     // }

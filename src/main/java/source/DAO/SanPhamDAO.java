@@ -37,4 +37,7 @@ public class SanPhamDAO {
         return sanPhamRepository.findByLoaiSanPham(loaiSanPham);
     }
 
+    public List<SanPham> timSanPhamOn() {
+        return sanPhamRepository.findByTrangThaiOn();
+    }
 }

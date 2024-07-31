@@ -12,9 +12,12 @@ import source.model.SanPham;
 @Service
 public interface SanPhamRepository extends JpaRepository<SanPham, String> {
 
-    @Query("SELECT sp FROM SanPham sp ORDER BY sp.id DESC")
+    @Query("SELECT sp FROM SanPham sp Where sp.TrangThai = true ORDER BY sp.id DESC")
     List<SanPham> findOrderByDesc();
 
     @Query("Select sp from SanPham sp where sp.LoaiSanPham = :loaiSanPham")
     List<SanPham> findByLoaiSanPham(LoaiSanPham loaiSanPham);
+
+    @Query("FROM SanPham WHERE TrangThai = true")
+    List<SanPham> findByTrangThaiOn();
 }

@@ -7,51 +7,7 @@
     <title>Giỏ hàng</title>
 </head>
 <body>
-    <nav>
-        <div class="layoutItemMenu">
-            <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
-            <form action="#" class="formFind">
-                <input type="text" placeholder="Tìm kiếm...">
-                <button type="submit">Tìm kiếm</button>
-            </form>
-            <ul class="miniMenu">
-                <li class="sup-menu admin" style="margin: 0;"><a>Quản lý</a>
-                    <ul class="child-menu">
-                        <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
-                        <li><a href="">Quản lý người dùng</a></li>
-                        <li><a href="">Quản lý loại</a></li>
-                        <li class="sup-menu"><a href="">Thống kê</a>
-                            <ul class="child-menu">
-                                <li><a href="">Thống kê sản phẩm</a></li>
-                                <li><a href="">Thống kê doanh thu</a></li>
-                                <li><a href="">Thống kê giỏ hàng</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sup-menu">
-                    <a class="user">Tài khoản</a>
-                    <a href="/login" class="noneuser">Đăng nhập</a>
-                    <ul class="child-menu user">
-                        <li><a href="">Quản lý tài khoản</a></li>
-                        <li><a href="">Đăng xuất</a></li>
-                    </ul>
-                </li>
-                <li><a href="/gioHang">Giỏ hàng</a></li>
-            </ul>
-        </div>
-        <script>
-            var elementAdmin = document.querySelectorAll('.admin');
-            elementAdmin.forEach(function(elementAdmin){
-                elementAdmin.style.display = 'none';
-            })
-    
-            var elementUser = document.querySelectorAll('.user');
-            elementUser.forEach(function(elementUser){
-                elementUser.style.display = 'none';
-            })
-        </script>
-    </nav>
+    <nav th:replace="~{/menu.html}"></nav>
     <div class="container">
         <div>
             <p th:text="${messGioHang}" style="margin: 0; padding: 0; font-size: 40px; color: var(--color_main4);"></p>
@@ -62,57 +18,121 @@
                 <label for="choseAll">Chọn tất cả</label>
             </div>
             <div class="buy">
-                <p>Tổng tiền: <span>1000000đ</span></p>
+                <p>Tổng tiền: <span class="totalMoney"></span></p>
                 <a href="">
                     <button class="btnStyle1 btnBuy">Đặt hàng</button>
                 </a>
             </div>
         </div>
         <div class="listProduct">
-            <div class="productItem" th:each="sanPham : ${listSanPhamTrongGioHang}">
+            <div class="productItem itemInListCart" th:each="ghDTO : ${listSanPhamTrongGioHang}">
                 <div class="chose">
                     <input type="checkbox" class="selectItem">
                     <label>Chọn</label>
                 </div>
                 <div class="inforProductItem">
-                    <img th:src="@{|image/sanpham/${sanPham.HinhAnh}|}">
+                    <img th:src="@{|image/sanpham/${ghDTO.SanPham.getHinhAnh()}|}">
                     <div class="textInforProductItem">
                         <p style="color: black">Tên sản phẩm</p>
-                        <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice">120000đ</span></p>
+                        <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice" th:text="${ghDTO.SanPham.getDonGiaDecimal()}"></span></p>
                     </div>
                 </div>
                 <div class="quanlityProductItem">
-                    <button class="btnStyle4 ">-</button>
-                    <input type="number" value="0" readonly >
-                    <button class="btnStyle4">+</button>
+                    <a th:href="@{|/truSoLuongSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}">
+                        <button class="btnStyle4 dec ">-</button>
+                    </a>
+
+                    <input type="number" readonly class="quantity " th:value="${ghDTO.SoLuong}">
+
+                    <a th:href="@{|/themSoLuongSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}">
+                        <button class="btnStyle4 inc">+</button>
+                    </a>
                 </div>
-                <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;">1000000đ</p>
-                <a href="" style="height: 149px;">
+                <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;"></p>
+                <a th:href="@{|/xoaSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}" style="height: 149px;">
                     <button class="btnStyle4 btnDelete">Xóa</button>
                 </a>
             </div>
         </div>
-        <script>
-            var allItem = document.getElementById('selectAll');
-            var listItem = document.querySelectorAll('.selectItem');
-
-            allItem.addEventListener('change', function(){
-                    listItem.forEach(item => item.checked = this.checked)
-            });
-
-            listItem.forEach(item => {
-                item.addEventListener('change', function(){
-                    if (Array.from(listItem).some(itm => !itm.checked)) {
-                        allItem.checked = false;
-                    } else {
-                        allItem.checked = true;
-                    }
-                });
-            });
-            document.querySelectorAll('.productItem').forEach(product => {
-
-            })
-        </script>
     </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const allItem = document.getElementById('selectAll');
+    const listItem = document.querySelectorAll('.selectItem');
+    const totalCartPriceElement = document.querySelector('.totalMoney');
+
+    function updateTotalCartPrice() {
+        let totalCartPrice = 0;
+
+        document.querySelectorAll('.itemInListCart').forEach(item => {
+            const selectItem = item.querySelector('.selectItem');
+            const quantityInput = item.querySelector('.quantity');
+            const unitPriceElement = item.querySelector('.unitPrice');
+            const totalPriceElement = item.querySelector('.totalPrice');
+
+            if (selectItem.checked) {
+                const unitPrice = parseFloat(unitPriceElement.textContent.replace(/,/g, ''));
+                const quantity = parseInt(quantityInput.value, 10);
+                const totalPrice = unitPrice * quantity;
+                totalPriceElement.textContent = `${totalPrice.toLocaleString()} VND`;
+                totalCartPrice += totalPrice;
+            } else {
+                totalPriceElement.textContent = '0 VND';
+            }
+        });
+
+        totalCartPriceElement.textContent = `${totalCartPrice.toLocaleString()} VND`;
+    }
+
+    allItem.addEventListener('change', function() {
+        listItem.forEach(item => item.checked = this.checked);
+        updateTotalCartPrice();
+    });
+
+    listItem.forEach(item => {
+        item.addEventListener('change', function() {
+            if (Array.from(listItem).some(itm => !itm.checked)) {
+                allItem.checked = false;
+            } else {
+                allItem.checked = true;
+            }
+            updateTotalCartPrice();
+        });
+    });
+
+    document.querySelectorAll('.itemInListCart').forEach(item => {
+        const decreaseButton = item.querySelector('.dec');
+        const increaseButton = item.querySelector('.inc');
+        const quantityInput = item.querySelector('.quantity');
+        const unitPriceElement = item.querySelector('.unitPrice');
+        const totalPriceElement = item.querySelector('.totalPrice');
+
+        function updateTotalPrice() {
+            const unit = parseFloat(unitPriceElement.textContent.replace(/,/g, ''));
+            const quantity = parseInt(quantityInput.value, 10);
+            const total = unit * quantity;
+            totalPriceElement.textContent = `${total.toLocaleString()} VND`;
+            updateTotalCartPrice(); // Cập nhật tổng giỏ hàng sau khi thay đổi số lượng
+        }
+
+        decreaseButton.addEventListener('click', () => {
+            let quantity = parseInt(quantityInput.value, 10);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+                updateTotalPrice();
+            }
+        });
+
+        increaseButton.addEventListener('click', () => {
+            let quantity = parseInt(quantityInput.value, 10);
+            quantityInput.value = quantity + 1;
+            updateTotalPrice();
+        });
+
+        updateTotalPrice(); // Cập nhật giá tổng khi tải trang
+    });
+});
+
+</script>
 </html>

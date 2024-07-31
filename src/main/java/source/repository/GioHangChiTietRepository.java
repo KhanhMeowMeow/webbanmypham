@@ -14,4 +14,7 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
 
     @Query("SELECT gct.SanPham FROM GioHangChiTiet gct INNER JOIN gct.GioHang gh WHERE gh.NguoiDung.MaNguoiDung = :maNguoiDung")
     List<SanPham> findSanPhamByMaNguoiDung(String maNguoiDung);
+
+    @Query("FROM GioHangChiTiet gct INNER JOIN gct.GioHang gh WHERE gh.NguoiDung.MaNguoiDung = :maNguoiDung")
+    List<GioHangChiTiet> findGioHangChiTietByMaNguoiDung(String maNguoiDung);
 }

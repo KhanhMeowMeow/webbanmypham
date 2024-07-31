@@ -10,51 +10,7 @@
 </head>
 
 <body>
-<nav>
-<div class="layoutItemMenu">
-    <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
-    <form action="#" class="formFind">
-        <input type="text" placeholder="Tìm kiếm...">
-        <button type="submit">Tìm kiếm</button>
-    </form>
-    <ul class="miniMenu">
-        <li class="sup-menu admin" style="margin: 0;"><a>Quản lý</a>
-            <ul class="child-menu">
-                <li><a href="/quanLySanPham">Quản lý sản phẩm</a></li>
-                <li><a href="">Quản lý người dùng</a></li>
-                <li><a href="">Quản lý loại</a></li>
-                <li class="sup-menu"><a href="">Thống kê</a>
-                    <ul class="child-menu">
-                        <li><a href="">Thống kê sản phẩm</a></li>
-                        <li><a href="">Thống kê doanh thu</a></li>
-                        <li><a href="">Thống kê giỏ hàng</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li class="sup-menu">
-            <a class="user">Tài khoản</a>
-            <a href="/login" class="noneuser">Đăng nhập</a>
-            <ul class="child-menu user">
-                <li><a href="">Quản lý tài khoản</a></li>
-                <li><a href="">Đăng xuất</a></li>
-            </ul>
-        </li>
-        <li><a href="/gioHang">Giỏ hàng</a></li>
-    </ul>
-</div>
-<script>
-    var elementAdmin = document.querySelectorAll('.admin');
-    elementAdmin.forEach(function (elementAdmin) {
-        elementAdmin.style.display = 'none';
-    })
-
-    var elementUser = document.querySelectorAll('.user');
-    elementUser.forEach(function (elementUser) {
-        elementUser.style.display = 'none';
-    })   
-</script>
-</nav>
+<nav th:replace="~{/menuFind.html}"></nav>
 <div class="container" th:object="${sanPham}">
     <div class="productContent">
         <img th:src="@{|/image/sanpham/*{HinhAnh}|}">

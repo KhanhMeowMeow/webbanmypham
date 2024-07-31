@@ -26,4 +26,6 @@ public class GioHangChiTiet {
     @ManyToOne
     @JoinColumn(name = "SanPham", referencedColumnName = "MaSanPham")
     private SanPham SanPham;
+
+    private int SoLuong;
 }

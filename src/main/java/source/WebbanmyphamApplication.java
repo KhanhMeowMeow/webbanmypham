@@ -8,5 +8,5 @@ public class WebbanmyphamApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WebbanmyphamApplication.class, args);
-	}
+	} 
 }

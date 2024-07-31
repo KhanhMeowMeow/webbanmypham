@@ -1,0 +1,119 @@
+@import url('/css/cssindex.css');
+
+
+
+.backGroundThemXoaSua {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.rowInput {
+    margin: 20px 0 0 20px;
+    width: 1160px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.columInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.rowButton {
+    display: flex;
+    justify-content: space-between;
+    width: 550px;
+    margin: 10px auto 20px auto;
+}
+
+.moduleInput {
+    margin-bottom: 10px;
+    width: 570px;
+}
+
+.moduleInput .input {
+    height: 10px;
+    width: 540px;
+}
+
+.moduleInput>.select {
+    width: 570px;
+    height: 40px;
+    padding: 10px 14.8px 10px 14.8px;
+}
+.titleList {
+    background-color: white;
+    margin: 10px 0 10px 0;
+    height: 50px;
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleList > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+}
+
+.titleList > div > p{
+    color: var(--color_main4);
+    text-align: center;
+    width: 200px;
+}
+
+.userItem {
+    margin-bottom: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnUserItem {
+    width: 80px;
+    height: 93px;
+    border: none;
+
+}
+
+.inforUser {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+}
+
+
+.inforUser>p {
+    color: black;
+    text-align: center;
+    width: 200px;
+}
+
+.vaiTroStyle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 40px;
+    width: 200px;
+}
+
+.vaiTroStyle input {
+    margin: 0 5px 0 0;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.vaiTroStyle > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+

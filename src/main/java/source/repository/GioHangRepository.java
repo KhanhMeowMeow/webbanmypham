@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface GioHangRepository extends JpaRepository<GioHang, String>{
     
-    @Query("From GioHang gh Where gh.NguoiDung.MaNguoiDung = ':maNguoiDung'")
+    @Query("From GioHang gh Where gh.NguoiDung.MaNguoiDung = :maNguoiDung")
     GioHang findByMaNguoiDung(String maNguoiDung);
 }

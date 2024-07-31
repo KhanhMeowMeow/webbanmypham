@@ -47,6 +47,8 @@ public class SanPham {
     private LoaiSanPham LoaiSanPham;
     
     private String MoTa;
+    
+    private boolean TrangThai;
 
     @OneToMany(mappedBy = "SanPham")
     private Set<GioHangChiTiet> GioHangChiTiets;
