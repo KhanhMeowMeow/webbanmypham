@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.hibernate.annotations.Parameter;
@@ -47,7 +49,9 @@ public class QuanLySanPhamController {
 
     @ModelAttribute("listSanPham")
     public List<SanPham> listSanPham() {
-        return sanPhamDAO.timSanPhamOn();
+        List<SanPham> list = sanPhamDAO.timSanPhamOn();
+        Collections.reverse(list);
+        return list;
     }
 
     
@@ -90,8 +94,10 @@ public class QuanLySanPhamController {
     
     @RequestMapping("/quanLySanPham/chon")
     public String requestChonSanPham(Model model,@RequestParam("MaSanPham") String MaSanPham) {
+        List<SanPham> list = sanPhamDAO.timSanPhamOn();
+        Collections.reverse(list);
         model.addAttribute("SanPham", sanPhamDAO.timSanPhamTheoMaSanPham(MaSanPham));
-        model.addAttribute("listSanPham", sanPhamDAO.timSanPhamOn());
+        model.addAttribute("listSanPham", list);
         return "/quanLySanPham";    
     }
 

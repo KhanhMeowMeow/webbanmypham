@@ -2,9 +2,12 @@ package source.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+
 
 import source.model.LoaiSanPham;
 import source.model.SanPham;
@@ -20,4 +23,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, String> {
 
     @Query("FROM SanPham WHERE TrangThai = true")
     List<SanPham> findByTrangThaiOn();
+    
+    @Query("FROM SanPham WHERE TrangThai = true")
+    Page<SanPham> pageByTrangThaiOn(Pageable pageable);
 }

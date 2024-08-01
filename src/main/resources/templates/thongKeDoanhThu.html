@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssThongKeDoanhThu.css">
+    <title>Thống kê doanh thu</title>
+</head>
+<body>
+    <nav th:replace="~{/menu.html}"></nav>
+    <div class="container">
+        <div class="title">
+            <h1>Thống kê doanh thu</h1>
+        </div>
+        <canvas id="canvas"></canvas>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const listMonth = [[${listMonth}]];
+    const listTotalMoney = [[${listTotalMoney}]];
+    /*]]>*/
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: listMonth,
+            datasets: [
+                {
+                    label: 'Doanh thu',
+                    backgroundColor: 'rgb(161, 35, 73)',
+                    borderColor: 'rgb(161, 35, 73)',
+                    data:listTotalMoney,
+                    tension: 0.6
+                },
+            ]
+        }
+    }
+
+    const canvas = document.getElementById('canvas').getContext('2d');
+    new Chart(canvas, config);
+</script>
+</html>

@@ -28,11 +28,9 @@ public class DonHang {
     @ManyToOne
     @JoinColumn(name = "NguoiDung", referencedColumnName = "MaNguoiDung")
     private NguoiDung NguoiDung;
-
-    private LocalTime ThoiGian;
-    private LocalDate NgayThang;
     private double TongTien;
     private String DiaChiGiao;
+    private LocalDate NgayThang;
 
     @OneToMany(mappedBy = "DonHang")
     private Set<DonHangChiTiet> DonHangChiTiets;

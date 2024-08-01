@@ -1,0 +1,24 @@
+@import url('/css/cssindex.css');
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.title h1 {
+    color: var(--color_main);
+    font-family: var(--font-family);
+}
+
+#canvas {
+    width: 70%;
+}

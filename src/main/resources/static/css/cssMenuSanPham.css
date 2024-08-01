@@ -9,6 +9,7 @@
     margin: 0;
     padding: 0;
 }
+
 .menu2 a {
     color: var(--color_main);
     font-weight: bold;
@@ -19,27 +20,82 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 1200px;
-    
+    margin-top: 10px;
+}
+
+.findInsightful {
+    width: 232px;
+    display: flex;
+    flex-direction: column;
+}
+
+.moduleFind {
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.moduleFind label {
+    color: var(--color_main4);
+    font-size: 17px;
+    font-family: var(--font-family);
+}
+
+.moduleFind form > input {
+    background-color: white;
+    border: 1px solid var(--color_main);
+    padding: 11.2px;
+    height: 16px;
+    width: 180px;
+    margin: 5px 0 10px 0;
+    display: flex;
+    font-size: var(--font-size_Normal);
+    flex-direction: column;
+}
+
+.moduleFind input:focus {
+    outline: none;
+}
+.moduleFind form div {
+    display: flex;
+    justify-content: center;
+}
+.moduleFind form button {
+    height: 40px;
+    width: 100px;
+}
+
+
+.moduleFind a {
+    padding: 0;
+    margin: 5px 0 5px 0;
+}
+
+.moduleFind a > button {
+    height: 40px;
+    width: 204px;
 }
 
 .listProducts {
-    width: 966px;
+    width: 958px;
 }
 
 .listProducts>p {
-    margin: 0;
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
     padding: 0;
     color: var(--color_main4);
     font-size: 25px;
-    height: 29px;
+    width: 958px;
+    text-align: center;
 }
 
 .layoutProduct {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    max-width: 966px;
+    max-width: 958px;
 }
 
 .product {
@@ -50,17 +106,39 @@
     background-color: white;
 }
 
-.product img{
+.product img {
     width: 204px;
     height: 204px;
     margin: 14px 14px 0 14px;
 }
 
-.inforProduct{
+.inforProduct {
     margin: 5px 14px 14px 14px;
 }
 
-.inforProduct > p{
+.inforProduct>p {
     margin: 0;
     padding: 0;
+}
+
+.pageList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.pageList > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0 auto;
+}
+
+.pageList a {
+    margin: 0 5px 0 5px;
+}
+
+.pageList a>button {
+    width: 30px;
+    height: 30px;
 }

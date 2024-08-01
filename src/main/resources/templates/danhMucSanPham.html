@@ -13,19 +13,40 @@
     <nav th:replace="~{/menuFind.html}"></nav>
     <div class="container">
         <ul class="menu2">
-            <li><a href="#">Cá nhân</a></li>
-            <li><a href="#">Cơ thể</a></li>
-            <li><a href="#">Da mặt</a></li>
-            <li><a href="#">Làm đẹp</a></li>
-            <li><a href="#">Tóc</a></li>
-            <li><a href="#">Nước hoa</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP002|}">Cá nhân</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP006|}">Cơ thể</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP004|}">Da mặt</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP001|}">Làm đẹp</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP003|}">Tóc</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP005|}">Nước hoa</a></li>
         </ul>
 
         <div class="layoutMenu">
-            <div style="width: 232px;">
-                
+            <div class="findInsightful">
+                <div class="moduleFind">
+                    <label>Tìm theo giá</label>
+                    <form th:action="@{/timSanPham}">
+                        <input type="number" name="minPrice" placeholder="Giá nhỏ nhất">
+                        <input type="number" name="maxPrice" placeholder="Giá lớn nhất">
+                        <input type="text" name="textFind" th:value="${formFind}" style="display: none;">
+                        <input type="text" name="loaiSanPham" th:value="${loaiSanPham}" style="display: none;">
+                        <input type="text" name="rule" th:value="${rule}" style="display: none;">
+                        <div>
+                            <button type="submit" class="btnStyle1">Tìm kiếm</button>
+                        </div>
+                    </form>
+                            
+                    
+                </div>
+                <div class="moduleFind">
+                    <label>Tùy chọn</label>
+                    <a th:href="@{|/timSanPham?textFind=${formFind}&maxPrice=${maxPrice}&minPrice=${minPrice}&loaiSanPham=${loaiSanPham}&rule=max|}"><button class="btnStyle2">Giá lớn nhất trước</button></a>
+                    <a th:href="@{|/timSanPham?textFind=${formFind}&maxPrice=${maxPrice}&minPrice=${minPrice}&loaiSanPham=${loaiSanPham}&rule=min|}"><button class="btnStyle2">Giá nhỏ nhất trước</button></a>
+                    <a th:href="@{/timSanPham(all='all')}"><button class="btnStyle2">Tất cả</button></a>
+                </div>
             </div>
             <div class="listProducts">
+                <p th:if="${messListSanPham}">Không thể tìm thấy sản phẩm bạn muốn tìm</p>
                 <div class="layoutProduct">
                     <div class="product" th:each="sanPham : ${listSanPham}">
                         <a th:href="@{|/chiTietSanPham?maSanPham=${sanPham.MaSanPham}|}">
@@ -37,6 +58,19 @@
                                 <!-- <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p> -->
                             </div>
                         </a>
+                    </div>
+                </div>
+                <div class="pageList" th:if="${totalPage < 2 ? false : true}">
+                    <div>
+                        <!-- <a th:href="@{/timSanPham((page=${number + 1}))}">
+                            <button class="btnStyle2">⬅</button>
+                        </a> -->
+                        <a th:href="@{|/timSanPham?page=${number}&textFind=${formFind}&maxPrice=${maxPrice}&minPrice=${minPrice}&loaiSanPham=${loaiSanPham}&rule=${rule}|}" th:each="number : ${listNumberPage}">
+                            <button th:text="${number + 1}" class="btnStyle2"></button>
+                        </a>
+                        <!-- <a th:href="@{/timSanPham((page=${number - 1}))}">
+                            <button  class="btnStyle2">⮕</button>
+                        </a> -->
                     </div>
                 </div>
             </div>

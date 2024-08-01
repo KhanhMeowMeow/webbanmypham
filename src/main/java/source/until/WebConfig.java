@@ -1,4 +1,4 @@
-package source.untill;
+package source.until;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,8 @@
 <nav xmlns:th="http://www.thymeleaf.org">
     <div class="layoutItemMenu">
         <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
-        <form action="/timSanPham" class="formFind">
-            <input type="text" placeholder="Tìm kiếm..." name="textFind">
+        <form th:action="@{/timSanPham}" class="formFind">
+            <input type="text" placeholder="Tìm kiếm..." name="textFind" th:value="${formFind}">
             <button type="submit">Tìm kiếm</button>
         </form>
         <ul class="miniMenu">
@@ -14,7 +14,7 @@
                     <li class="sup-menu"><a href="">Thống kê</a>
                         <ul class="child-menu">
                             <li><a href="">Thống kê sản phẩm</a></li>
-                            <li><a href="">Thống kê doanh thu</a></li>
+                            <li><a href="/thongKeDoanhThu">Thống kê doanh thu</a></li>
                             <li><a href="">Thống kê giỏ hàng</a></li>
                         </ul>
                     </li>

@@ -16,12 +16,12 @@
     </div>
     
     <ul class="menu2">
-        <li><a href="#">Cá nhân</a></li>
-        <li><a href="#">Cơ thể</a></li>
-        <li><a href="#">Da mặt</a></li>
-        <li><a href="#">Làm đẹp</a></li>
-        <li><a href="#">Tóc</a></li>
-        <li><a href="#">Nước hoa</a></li>
+        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP002|}">Cá nhân</a></li>
+        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP006|}">Cơ thể</a></li>
+        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP004|}">Da mặt</a></li>
+        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP001|}">Làm đẹp</a></li>
+        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP003|}">Tóc</a></li>
+        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP005|}">Nước hoa</a></li>
     </ul>
 
     <div style="margin-top: 30px;" class="container">
@@ -40,6 +40,12 @@
                     </a>
                 </div>
             </div>
+            <div style="display: flex; justify-content: center; width: 100%; margin-top: 20px;">
+                <a href="/timSanPham">
+                    <button class="btnStyle2" style="height: 46px; width: 232px;">Xem thêm</button>
+                </a>
+            </div>
+
         </div>  
     </div>
 </div>
