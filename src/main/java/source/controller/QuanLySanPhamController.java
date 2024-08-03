@@ -1,7 +1,10 @@
 package source.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +13,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.JFileChooser;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +32,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import source.DAO.LoaiSanPhamDAO;
 import source.DAO.SanPhamDAO;
 import source.model.LoaiSanPham;
 import source.model.SanPham;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 public class QuanLySanPhamController {
@@ -127,4 +139,59 @@ public class QuanLySanPhamController {
         }
     }
 
+    @RequestMapping("/xuatFileSanPham")
+    public String requestXuatFileSanPham(HttpServletResponse response) {
+        List<SanPham> listSanPham = sanPhamDAO.timTatCaSanPham();
+        // JFileChooser fileChooser = new JFileChooser();
+        // fileChooser.setDialogTitle("Chọn vị trí lưu file Excel");
+        // fileChooser.setSelectedFile(new File("sanpham.xlsx"));
+
+        // int userSelection = fileChooser.showSaveDialog(null);
+        // if (userSelection != JFileChooser.APPROVE_OPTION) {
+        //     return "redirect:/quanLySanPham";
+        // }
+
+        // File fileToSave = fileChooser.getSelectedFile();
+        // String filePath = fileToSave.getAbsolutePath();
+
+        try (Workbook workbook = new SXSSFWorkbook()){
+            Sheet sheet = workbook.createSheet("SanPham");
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("Mã sản phẩm");
+            headerRow.createCell(1).setCellValue("Tên sản phẩm");
+            headerRow.createCell(2).setCellValue("Số lượng");
+            headerRow.createCell(3).setCellValue("Hình ảnh");
+            headerRow.createCell(4).setCellValue("Màu sắc");
+            headerRow.createCell(5).setCellValue("Đơn giá");
+            headerRow.createCell(6).setCellValue("Loại sản phẩm");
+            headerRow.createCell(7).setCellValue("Mô tả");
+            headerRow.createCell(8).setCellValue("Trạng thái");
+
+            int indexRow = 1;
+            for (SanPham sanpham : listSanPham) {
+                Row row = sheet.createRow(indexRow);
+                row.createCell(0).setCellValue(sanpham.getMaSanPham());
+                row.createCell(1).setCellValue(sanpham.getTenSanPham());
+                row.createCell(2).setCellValue(sanpham.getSoLuong());
+                row.createCell(3).setCellValue(sanpham.getHinhAnh());
+                row.createCell(4).setCellValue(sanpham.getMauSac());
+                row.createCell(5).setCellValue(sanpham.getDonGia());
+                row.createCell(6).setCellValue(sanpham.getLoaiSanPham().getMaLoaiSanPham());
+                row.createCell(7).setCellValue(sanpham.getMoTa());
+                row.createCell(8).setCellValue(sanpham.isTrangThai());
+                indexRow ++;
+            }
+
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=sanpham.xlsx");
+
+            try (OutputStream out = response.getOutputStream()) {
+            workbook.write(out);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return "redirect:/quanLySanPham";
+    }
+    
 }
