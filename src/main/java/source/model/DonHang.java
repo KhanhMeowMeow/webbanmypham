@@ -31,7 +31,12 @@ public class DonHang {
     private double TongTien;
     private String DiaChiGiao;
     private LocalDate NgayThang;
+    private boolean ThanhToan;
 
     @OneToMany(mappedBy = "DonHang")
     private Set<DonHangChiTiet> DonHangChiTiets;
+
+    public String getTongTienDecimal(){
+        return String.format("%.0f", TongTien);
+    }
 }

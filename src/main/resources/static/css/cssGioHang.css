@@ -17,8 +17,8 @@
 }
 
 .chose>input[type="checkbox"] {
-    width: 32px;
-    height: 32px;
+    width: 20px;
+    height: 20px;
     background-color: white;
     border: 2px solid var(--color_main);
     cursor: pointer;
@@ -26,18 +26,14 @@
 
 .chose>input[type="checkbox"]:checked {
     background-color: var(--color_main);
-    /* Thay đổi nền khi chọn */
     border-color: var(--color_main);
-    /* Thay đổi viền khi chọn */
 }
 
 .chose>label {
-    font-size: 28px;
+    font-size: 20px;
     color: var(--color_main4);
-    margin-left: 10px;
-    /* Khoảng cách giữa checkbox và label */
+    margin-left: 5px;
     cursor: pointer;
-    /* Thay đổi con trỏ khi hover */
 }
 
 .buy {

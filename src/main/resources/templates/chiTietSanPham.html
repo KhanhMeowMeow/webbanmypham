@@ -16,7 +16,7 @@
         <img th:src="@{|/image/sanpham/*{HinhAnh}|}">
         <div class="inforProductContent">
             <p th:text="*{TenSanPham}" class="nameProduct"></p>
-            <p th:text="*{getDonGiaDecimal()} + 'đ'" class="priceProduct"></p>
+            <p th:text="*{#numbers.formatDecimal(DonGia, 0, 'POINT', 0, 'COMMA') + 'đ'}" class="priceProduct"></p>
             <div class="listButton">
                 <a th:href="@{|/themGioHang?maSanPham=*{MaSanPham}|}"><button class="btnStyle2 button">Thêm giỏ hàng</button></a>
                 <a th:href="@{|/muaNgay?maSanPham=*{MaSanPham}|}" style="display: none;"><button class="btnStyle1 button">Mua ngay</button></a>

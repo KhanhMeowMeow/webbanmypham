@@ -28,8 +28,8 @@ public class NguoiDungDAO {
         gioHangDAO.taoGioHang(gioHang);
     }
 
-    public NguoiDung timTheoMaNgoiDung(String MaNguoiDung){
-        return nguoiDungRepository.findById(MaNguoiDung).orElse(null);
+    public NguoiDung timTheoMaNgoiDung(String object){
+        return nguoiDungRepository.findById(object).orElse(null);
     }
 
     public List<NguoiDung> timTatCaNgoiDung(){

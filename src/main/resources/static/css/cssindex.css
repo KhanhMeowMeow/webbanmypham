@@ -274,3 +274,8 @@ nav {
     font-size: var(--font-size_Normal);
 }
 
+footer {
+    height: 300px;
+    background-color: var(--color_main);
+    margin-top: 10px;
+}

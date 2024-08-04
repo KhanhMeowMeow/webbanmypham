@@ -1,0 +1,51 @@
+@import url("/css/cssindex.css");
+
+.layoutOther {
+    margin: 0 auto 0 auto;
+    background-color: white;
+    padding: 50px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+.layoutOther >p {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.layoutOther >p>span {
+    margin-left: 5px;
+    font-weight: normal;
+}
+.titlePayment {
+    margin: 0 auto 0 auto;
+    color: var(--color_main);
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.tablePayment {
+    margin-bottom: 10px;
+    width: 700px;
+    border: none;
+}
+.tablePayment td {
+    text-align: start;
+    font-family: var(--font-family);
+}
+.tablePayment th {
+    text-align: start;
+    font-family: var(--font-family);
+}
+.tablePayment tr>td>p {
+    text-align: start;
+    max-width: 250px;
+}
+.btnPayment {
+    margin-top: 20px;
+}
+
+.btnPayment button{
+    height: 40px;
+    width: 100px;
+}

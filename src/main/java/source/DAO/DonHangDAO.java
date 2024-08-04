@@ -17,4 +17,16 @@ public class DonHangDAO {
     public List<ThongKeDoanhThuDTO> thongKeDoanhThu(){
         return donHangRepository.thongKeDoanhThu();
     }
+
+    public DonHang thenDonHang(DonHang donHang){
+        return donHangRepository.save(donHang);
+    }
+
+    public List<DonHang> timTatCaDonHang(){
+        return donHangRepository.findAll();
+    }
+
+    public DonHang timDonHangTheoID(String idDonHang){
+        return donHangRepository.findByIdDonHang(idDonHang);
+    }
 }

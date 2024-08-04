@@ -1,142 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
+    <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ hàng</title>
-    <style>
-        .cart-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .item-name {
-            flex: 1;
-        }
-        .quantity {
-            display: flex;
-            align-items: center;
-        }
-        .quantity button {
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .quantity input {
-            width: 40px;
-            height: 30px;
-            text-align: center;
-            border: 1px solid #ccc;
-            margin: 0 5px;
-        }
-    </style>
 </head>
 <body>
-    <div class="listProduct">
-        <div class="productItem itemInListCart" th:each="sanPham : ${listSanPhamTrongGioHang}">
-            <div class="chose">
-                <input type="checkbox" class="selectItem">
-                <label>Chọn</label>
-            </div>
-            <div class="inforProductItem">
-                <img th:src="@{|image/sanpham/${sanPham.HinhAnh}|}">
-                <div class="textInforProductItem">
-                    <p style="color: black">Tên sản phẩm</p>
-                    <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice" th:text="${sanPham.getDonGiaDecimal()}"></span></p>
-                </div>
-            </div>
-            <div class="quanlityProductItem">
-                <button class="btnStyle4 dec">-</button>
-                <input type="number" value="1" readonly class="quantity">
-                <button class="btnStyle4 inc">+</button>
-            </div>
-            <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;"></p>
-            <a href="" style="height: 149px;">
-                <button class="btnStyle4 btnDelete">Xóa</button>
-            </a>
-        </div>
+    <div th:each="other : ${listSanPhamOther}">
+        <h3 th:text="${other.productId}"></h3>
+        <h3 th:text="${other.quantity}"></h3>
     </div>
-    <p id="totalCartPrice" style="font-weight: bold; font-size: 32px;">Tổng giá giỏ hàng: 0 VND</p>
-    
+    <h3 th:text="${selectedItemsJson}"></h3>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const allItem = document.getElementById('selectAll');
-    const listItem = document.querySelectorAll('.selectItem');
-    const totalCartPriceElement = document.getElementById('totalCartPrice');
-
-    function updateTotalCartPrice() {
-        let totalCartPrice = 0;
-
-        document.querySelectorAll('.itemInListCart').forEach(item => {
-            const selectItem = item.querySelector('.selectItem');
-            const quantityInput = item.querySelector('.quantity');
-            const unitPriceElement = item.querySelector('.unitPrice');
-            const totalPriceElement = item.querySelector('.totalPrice');
-
-            if (selectItem.checked) {
-                const unitPrice = parseFloat(unitPriceElement.textContent.replace(/,/g, ''));
-                const quantity = parseInt(quantityInput.value, 10);
-                const totalPrice = unitPrice * quantity;
-                totalPriceElement.textContent = `${totalPrice.toLocaleString()} VND`;
-                totalCartPrice += totalPrice;
-            } else {
-                totalPriceElement.textContent = '0 VND';
-            }
-        });
-
-        totalCartPriceElement.textContent = `Tổng giá giỏ hàng: ${totalCartPrice.toLocaleString()} VND`;
-    }
-
-    allItem.addEventListener('change', function() {
-        listItem.forEach(item => item.checked = this.checked);
-        updateTotalCartPrice();
-    });
-
-    listItem.forEach(item => {
-        item.addEventListener('change', function() {
-            if (Array.from(listItem).some(itm => !itm.checked)) {
-                allItem.checked = false;
-            } else {
-                allItem.checked = true;
-            }
-            updateTotalCartPrice();
-        });
-    });
-
-    document.querySelectorAll('.itemInListCart').forEach(item => {
-        const decreaseButton = item.querySelector('.dec');
-        const increaseButton = item.querySelector('.inc');
-        const quantityInput = item.querySelector('.quantity');
-        const unitPriceElement = item.querySelector('.unitPrice');
-        const totalPriceElement = item.querySelector('.totalPrice');
-
-        function updateTotalPrice() {
-            const unit = parseFloat(unitPriceElement.textContent.replace(/,/g, ''));
-            const quantity = parseInt(quantityInput.value, 10);
-            const total = unit * quantity;
-            totalPriceElement.textContent = `${total.toLocaleString()} VND`;
-            updateTotalCartPrice(); // Cập nhật tổng giỏ hàng sau khi thay đổi số lượng
-        }
-
-        decreaseButton.addEventListener('click', () => {
-            let quantity = parseInt(quantityInput.value, 10);
-            if (quantity > 1) {
-                quantityInput.value = quantity - 1;
-                updateTotalPrice();
-            }
-        });
-
-        increaseButton.addEventListener('click', () => {
-            let quantity = parseInt(quantityInput.value, 10);
-            quantityInput.value = quantity + 1;
-            updateTotalPrice();
-        });
-
-        updateTotalPrice(); // Cập nhật giá tổng khi tải trang
-    });
-});
-
-</script>
 </html>

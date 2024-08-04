@@ -5,8 +5,8 @@
 }
 
 .formLogin {
-    height: 490px;
-    width: 1000px;
+    width: 600px;
+    padding: 20px;
     margin: auto;
     margin-top: 80px;
     margin-bottom: 70px;
@@ -27,19 +27,13 @@
     font-size: 40px;
     font-weight: bold;
 }
-.divSignUp {
-    background-color: var(--color_main2);
-    width: 400px;
-    display: flex;
-}
-.divLogin {
-    background-color: none;
-    width: 600px;
-    display: flex;
-}
-.divCenter{
-    margin: auto;
-}
+
 .messageLogin {
     color: red;
+}
+
+.moduleInput a{
+    text-decoration: underline;
+    margin-top: 20px;
+    color: var(--color_main);
 }

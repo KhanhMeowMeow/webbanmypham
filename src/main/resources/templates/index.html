@@ -34,7 +34,7 @@
                         <div class="inforProduct">
                             <p style="font-size: 15px;" th:text="${sanPhamMoi.TenSanPham}"></p>
                             <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;" 
-                                th:text="${sanPhamMoi.getDonGiaDecimal() + 'đ'}"></p>
+                                th:text="${#numbers.formatDecimal(sanPhamMoi.getDonGia(), 0, 'POINT', 0, 'COMMA') + 'đ'}"></p>
                             <!-- <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p> -->
                         </div>                                                                                
                     </a>

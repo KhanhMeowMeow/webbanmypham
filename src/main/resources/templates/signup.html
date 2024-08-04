@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/csslogin.css">
+    <title>Đăng kí</title>
+</head>
+<body>
+    <nav>
+        <div class="layoutItemMenu">
+            <a href="/"><img src="/image/Logo/logoXINHColor.png" alt="Logo" width="117"></a>
+            <ul class="miniMenu">
+               
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="formLogin">
+            <div class="divCenter">
+                <div class="moduleInput" style="align-items: center;">
+                    <p class="p_label">Đăng kí</p>
+                </div>
+                    <form action="/submitSignup" class="form" method="post">
+                        <div class="moduleInput">
+                            <label for="TenDangNhap">Tên đăng nhập</label>
+                            <input type="text" name="TenDangNhap" class="input">
+                        </div>
+                        <div class="moduleInput">
+                            <label for="MatKhau">Mật khẩu</label>
+                            <input type="password" name="MatKhau" class="input">
+                        </div>
+                        <div class="moduleInput">
+                            <label for="MatKhau">Nhập lại mật khẩu</label>
+                            <input type="password" name="NhapLaiMatKhau" class="input">
+                        </div>
+                        <div class="moduleInput">
+                            <label for="email">Email</label>
+                            <input type="email" name="Email" class="input">
+                        </div>
+                        <div class="moduleInput">
+                            <label for="soDienThoai">Số điện thoại</label>
+                            <input type="text" name="SoDienThoai" class="input">
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput" style="align-items: center; margin-top: 30px;">
+                            <button class="btnStyle1" style="width: 130px; height: 50px;">Đăng kí</button>
+                            <a href="/login">Đăng nhập</a>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div style="display: flex; justify-content: center;">
+        </div>
+    </footer>
+</body>
+</html>

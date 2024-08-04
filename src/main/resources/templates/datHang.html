@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssDatHang.css">
+    <title>Đặt hàng</title>
+</head>
+<body>
+<nav th:replace="/menu.html"></nav>
+<div class="container">
+    <div class="layoutOther">
+        <p class="titlePayment">Hóa đơn</p>
+        <table class="tablePayment" th:object="${donHang}">
+            <thead>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>   
+            <tbody>
+                <tr th:each="orther : ${listOther}">
+                    <td><p th:text="${orther.SanPham.getTenSanPham()}"></p></td>
+                    <td th:text="${#numbers.formatDecimal(orther.SanPham.getDonGia(), 0, 'POINT',0, 'COMMA') + 'đ'}"></td>
+                    <td th:text="${orther.SoLuong}"></td>
+                    <td th:text="${#numbers.formatDecimal(orther.SanPham.getDonGia() * orther.getSoLuong(), 0, 'POINT',0, 'COMMA') + 'đ'}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Địa chỉ thanh toán:<span th:text="${donHang.DiaChiGiao}"></span></p>
+        <p>Ngày lên đơn:<span th:text="${donHang.NgayThang}"></span></p>
+        <p>Cá nhân thanh toán: <span th:text="${donHang.NguoiDung.getMaNguoiDung()}"></span></p>
+        <p>Mã hóa đơn:<span th:text="${donHang.MaDonHang}"></span></p>
+        <p>Tổng tiền:<span style="font-weight: bold; color: var(--color_main);" th:text="${#numbers.formatDecimal(donHang.TongTien, 0, 'POINT',0, 'COMMA') + 'đ'}"></span></p>
+        <div class="btnPayment">
+            <a th:href="@{|/api/VNPay_payment?maDonHang=${donHang.MaDonHang}&tongTien=${donHang.getTongTienDecimal()}|}">
+                <button class="btnStyle1">Thanh toán</button>
+            </a>
+            <a href="/gioHang">
+                <button class="btnStyle2">Hủy</button>
+            </a>
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>

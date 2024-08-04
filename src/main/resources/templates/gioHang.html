@@ -19,48 +19,57 @@
             </div>
             <div class="buy">
                 <p>Tổng tiền: <span class="totalMoney"></span></p>
-                <a href="">
-                    <button class="btnStyle1 btnBuy">Đặt hàng</button>
-                </a>
+                <form id="checkoutForm" action="/datHang" method="post">
+                    <input type="hidden" id="selectedItems" name="selectedItems">
+                    <button type="submit" class="btnStyle1 btnBuy">Đặt hàng</button>
+                </form>
             </div>
         </div>
         <div class="listProduct">
             <div class="productItem itemInListCart" th:each="ghDTO : ${listSanPhamTrongGioHang}">
                 <div class="chose">
-                    <input type="checkbox" class="selectItem">
+                    <input type="checkbox" class="selectItem" >
                     <label>Chọn</label>
                 </div>
-                <div class="inforProductItem">
-                    <img th:src="@{|image/sanpham/${ghDTO.SanPham.getHinhAnh()}|}">
-                    <div class="textInforProductItem">
-                        <p style="color: black">Tên sản phẩm</p>
-                        <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice" th:text="${ghDTO.SanPham.getDonGiaDecimal()}"></span></p>
+                <div style="width: 850px; display: flex; align-items: center; justify-content: space-between;">
+                    <div class="inforProductItem">
+                        <img th:src="@{|image/sanpham/${ghDTO.SanPham.getHinhAnh()}|}">
+                        <div class="textInforProductItem">
+                            <p style="color: black; width: 300px;" th:text="${ghDTO.SanPham.getTenSanPham()}"></p>
+                            <p style="margin-top: 5px;">Đơn giá: <span class="textPrice unitPrice" th:text="${ghDTO.SanPham.getDonGiaDecimal()}"></span></p>
+                        </div>
                     </div>
-                </div>
-                <div class="quanlityProductItem">
-                    <a th:href="@{|/truSoLuongSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}">
-                        <button class="btnStyle4 dec ">-</button>
-                    </a>
+                    <div class="quanlityProductItem">
+                        <a th:href="@{|/truSoLuongSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}">
+                            <button class="btnStyle4 dec">-</button>
+                        </a>
 
-                    <input type="number" readonly class="quantity " th:value="${ghDTO.SoLuong}">
-
-                    <a th:href="@{|/themSoLuongSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}">
-                        <button class="btnStyle4 inc">+</button>
-                    </a>
+                        <input type="number" readonly class="quantity" 
+                                th:value="${ghDTO.SoLuong}" 
+                                th:data-product-Id="${ghDTO.SanPham.getMaSanPham()}">    
+                        <a th:href="@{|/themSoLuongSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}">
+                            <button class="btnStyle4 inc">+</button>
+                        </a>
+                    </div>
+                    <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;"></p>
                 </div>
-                <p class="textPrice totalPrice" style="font-weight: bold; font-size: 28px;"></p>
                 <a th:href="@{|/xoaSanPham?maSanPham=${ghDTO.SanPham.getMaSanPham()}|}" style="height: 149px;">
                     <button class="btnStyle4 btnDelete">Xóa</button>
                 </a>
             </div>
         </div>
     </div>
+    <footer>
+
+    </footer>
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
     const allItem = document.getElementById('selectAll');
     const listItem = document.querySelectorAll('.selectItem');
     const totalCartPriceElement = document.querySelector('.totalMoney');
+    const checkoutForm = document.getElementById('checkoutForm');
+    const selectedItemsInput = document.getElementById('selectedItems');
 
     function updateTotalCartPrice() {
         let totalCartPrice = 0;
@@ -85,9 +94,28 @@
         totalCartPriceElement.textContent = `${totalCartPrice.toLocaleString()} VND`;
     }
 
+    function getSelectedItems() {
+        const selectedItems = [];
+        document.querySelectorAll('.itemInListCart').forEach(item => {
+            const selectItem = item.querySelector('.selectItem');
+            if (selectItem.checked) {
+                const productId = item.querySelector('.quantity').dataset.productId; // Giả sử bạn có data-product-id
+                const quantity = item.querySelector('.quantity').value;
+                selectedItems.push({ productId, quantity });
+            }
+        });
+        return selectedItems;
+    }
+
+    function updateSelectedItems() {
+        const selectedItems = getSelectedItems();
+        selectedItemsInput.value = JSON.stringify(selectedItems);
+    }
+
     allItem.addEventListener('change', function() {
         listItem.forEach(item => item.checked = this.checked);
         updateTotalCartPrice();
+        updateSelectedItems();
     });
 
     listItem.forEach(item => {
@@ -98,6 +126,7 @@
                 allItem.checked = true;
             }
             updateTotalCartPrice();
+            updateSelectedItems();
         });
     });
 
@@ -114,6 +143,7 @@
             const total = unit * quantity;
             totalPriceElement.textContent = `${total.toLocaleString()} VND`;
             updateTotalCartPrice(); // Cập nhật tổng giỏ hàng sau khi thay đổi số lượng
+            updateSelectedItems();
         }
 
         decreaseButton.addEventListener('click', () => {
@@ -123,7 +153,7 @@
                 updateTotalPrice();
             }
         });
-
+    
         increaseButton.addEventListener('click', () => {
             let quantity = parseInt(quantityInput.value, 10);
             quantityInput.value = quantity + 1;
@@ -132,7 +162,11 @@
 
         updateTotalPrice(); // Cập nhật giá tổng khi tải trang
     });
-});
 
+    checkoutForm.addEventListener('submit', function(event) {
+        // Update selected items before form submission
+        updateSelectedItems();
+    });
+});
 </script>
 </html>

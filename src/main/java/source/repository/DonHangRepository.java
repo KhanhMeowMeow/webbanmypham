@@ -10,6 +10,9 @@ import source.model.ThongKeDoanhThuDTO;
 
 public interface DonHangRepository extends JpaRepository<DonHang, String> {
 
-    @Query("SELECT new source.model.ThongKeDoanhThuDTO(MONTH(dh.NgayThang), SUM(dh.TongTien)) FROM DonHang dh GROUP BY MONTH(dh.NgayThang)")
+    @Query("SELECT new source.model.ThongKeDoanhThuDTO(MONTH(dh.NgayThang), SUM(dh.TongTien)) FROM DonHang dh WHERE dh.ThanhToan = true GROUP BY MONTH(dh.NgayThang)")
     List<ThongKeDoanhThuDTO> thongKeDoanhThu();
+
+    @Query("From DonHang dh Where dh.MaDonHang = :idDonHang")
+    DonHang findByIdDonHang(String idDonHang);
 }

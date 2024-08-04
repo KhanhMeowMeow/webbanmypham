@@ -134,7 +134,7 @@
                         <p th:text="${sanpham.MaSanPham}"></p>
                         <img th:src="@{|/image/sanpham/${sanpham.HinhAnh}|}" width="75px" height="75px">
                         <p style="width: 272px;" th:text="${sanpham.TenSanPham}"></p>
-                        <p style="color: var(--color_main);" th:text="${sanpham.getDonGiaDecimal()}"></p>
+                        <p style="color: var(--color_main);" th:text="${sanpham.getDonGiaDecimal() + 'đ'}"></p>
                         <p th:text="${sanpham.SoLuong}"></p>
                     </div>
                     <a th:href="@{|/quanLySanPham/xoa?MaSanPham=${sanpham.MaSanPham}|}" class="textBassic">

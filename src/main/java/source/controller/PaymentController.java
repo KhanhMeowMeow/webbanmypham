@@ -1,6 +1,7 @@
 package source.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -26,13 +27,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PaymentController {
 
     @GetMapping("/VNPay_payment")
-    public RedirectView getPayment() throws UnsupportedEncodingException {
+    public RedirectView getPayment(
+        @RequestParam("maDonHang") String maDonHang,
+        @RequestParam("tongTien") long tongTien
+    ) throws UnsupportedEncodingException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "othertype";
-        long amount = 100000000;
+        long amount = tongTien * 100;
         
-        String vnp_TxnRef = Config.getRandomNumber(8);
+        String vnp_TxnRef = maDonHang;
         String vnp_IpAddr = "127.0.0.1";
 
         String vnp_TmnCode = Config.vnp_TmnCode;
@@ -90,5 +94,8 @@ public class PaymentController {
 
         return new RedirectView(paymentUrl);
     }
+
+
+    
     
 }
