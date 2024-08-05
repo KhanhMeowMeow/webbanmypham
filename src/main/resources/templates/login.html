@@ -22,8 +22,7 @@
                 <div class="moduleInput" style="align-items: center;">
                     <p class="p_label">Đăng nhập</p>
                 </div>
-
-                <form action="/submitLogin" class="form">
+                <form th:action="@{/submitLogin}" class="form" method="post">
                     <div class="moduleInput">
                         <label for="TenDangNhap">Tên đăng nhập</label>
                         <input type="text" name="TenDangNhap" class="input">
@@ -44,13 +43,16 @@
         </div>
     </div>
 
-    <footer>
-        <div style="display: flex; justify-content: center;">
-        </div>
+    <footer th:replace="~{/footer.html}">
     </footer>
 </body>
-<script>
-   
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var isSignup =  /*[[${isSignup}]]*/"";
+    if(isSignup){
+        alert('Đăng kí thành công, bạn có thể đăng nhập !');
+    }
+    /*]]>*/
 </script>
 
 </html>

@@ -54,27 +54,28 @@ input {
     flex-direction: column;
 }
 
-.btnStyle1{
+.btnStyle1 {
     color: white;
     font-size: var(--font-size_Normal);
     background-color: var(--color_main);
     border: 1px solid var(--color_main);
 }
 
-.btnStyle2{
+.btnStyle2 {
     color: var(--color_main);
     font-size: var(--font-size_Normal);
     background-color: white;
     border: 1px solid var(--color_main);
 }
 
-.btnStyle3{
+.btnStyle3 {
     color: var(--color_main);
     font-size: var(--font-size_Normal);
     background-color: var(--color_main2);
     border: 1px solid var(--color_main);
 }
-.btnStyle4{
+
+.btnStyle4 {
     color: var(--color_main);
     font-size: var(--font-size_Normal);
     background-color: var(--color_main2);
@@ -88,6 +89,7 @@ input {
     text-decoration: none;
     color: var(--color_main4);
 }
+
 .outlineError {
     margin: 0;
     padding: 0;
@@ -97,6 +99,7 @@ input {
     justify-content: start;
     margin-top: 5px;
 }
+
 .error {
     margin: 0;
     padding: 0;
@@ -104,12 +107,14 @@ input {
     font-size: var(--font-size_Normal);
     margin-top: 5px;
 }
+
 .moduleInput {
     display: flex;
     flex-direction: column;
     align-items: start;
     margin-bottom: 20px;
 }
+
 .moduleInput .input {
     margin: 0;
     height: 20px;
@@ -121,14 +126,17 @@ input {
     background-color: white;
     font-family: var(--font-family);
 }
+
 .moduleInput>label {
     margin: 0 0 5px 0;
     color: var(--color_main4);
 }
-.moduleInput>.input:focus{
+
+.moduleInput>.input:focus {
     outline: none;
     background-color: var(--color_main3);
 }
+
 .errorOutline {
     margin: 0;
     padding: 0;
@@ -138,6 +146,7 @@ input {
     justify-content: start;
     margin-top: 5px;
 }
+
 .error {
     margin: 0;
     padding: 0;
@@ -145,6 +154,7 @@ input {
     font-size: var(--font-size_Normal);
     margin-top: 5px;
 }
+
 .list {
     padding: 0;
     margin: 0;
@@ -152,17 +162,19 @@ input {
     overflow-x: hidden;
 }
 
-.list::-webkit-scrollbar{
+.list::-webkit-scrollbar {
     width: 10px;
 }
 
 .list::-webkit-scrollbar-track {
     background: white;
 }
+
 .list::-webkit-scrollbar-thumb {
     background: var(--color_main4);
     border-radius: 2px;
 }
+
 .list::-webkit-scrollbar-thumb:hover {
     background: var(--color_main);
 }
@@ -175,6 +187,7 @@ nav {
     justify-content: center;
     align-items: center;
 }
+
 .layoutItemMenu {
     display: flex;
     justify-content: space-between;
@@ -182,6 +195,7 @@ nav {
     width: 1200px;
     margin: auto;
 }
+
 .miniMenu {
     margin: 0;
     padding: 0;
@@ -190,23 +204,28 @@ nav {
     justify-content: end;
     align-items: center;
 }
-.miniMenu > li {
+
+.miniMenu>li {
     height: 100%;
     display: flex;
     align-items: center;
     margin: 0 0 0 20px;
 
 }
+
 .miniMenu a {
     color: var(--color_main);
 }
+
 .sup-menu {
     position: relative;
 }
-.sup-menu > li{
+
+.sup-menu>li {
     display: flex;
     align-items: center;
 }
+
 .child-menu {
     position: absolute;
     background-color: var(--color_main);
@@ -216,27 +235,32 @@ nav {
     top: 69px;
     display: none;
 }
+
 .sup-menu:hover .child-menu {
     display: block;
 }
-.child-menu li{
+
+.child-menu li {
     text-align: center;
     padding: 15px;
     border-bottom: 0.5px solid rgb(165, 55, 88);
 }
-.child-menu > li:last-child{
+
+.child-menu>li:last-child {
     border: none;
 }
-.child-menu a{
+
+.child-menu a {
     color: white;
 }
 
-.child-menu .sup-menu .child-menu{
+.child-menu .sup-menu .child-menu {
     left: -170px;
     top: 0;
     display: none;
 }
-.child-menu .sup-menu:hover .child-menu{
+
+.child-menu .sup-menu:hover .child-menu {
     display: block;
 }
 
@@ -275,7 +299,47 @@ nav {
 }
 
 footer {
-    height: 300px;
+    padding: 50px;
     background-color: var(--color_main);
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+footer>.layoutFooter {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+footer>.layoutFooter img {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+footer .colummFooter {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+}
+
+footer .colummFooter  p {
+    color: white;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+footer .colummFooter p a{
+    color: white;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+footer .colummFooter .titleFooter {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 15px;
 }

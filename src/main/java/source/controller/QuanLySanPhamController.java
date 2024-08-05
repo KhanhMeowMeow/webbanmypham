@@ -142,17 +142,6 @@ public class QuanLySanPhamController {
     @RequestMapping("/xuatFileSanPham")
     public String requestXuatFileSanPham(HttpServletResponse response) {
         List<SanPham> listSanPham = sanPhamDAO.timTatCaSanPham();
-        // JFileChooser fileChooser = new JFileChooser();
-        // fileChooser.setDialogTitle("Chọn vị trí lưu file Excel");
-        // fileChooser.setSelectedFile(new File("sanpham.xlsx"));
-
-        // int userSelection = fileChooser.showSaveDialog(null);
-        // if (userSelection != JFileChooser.APPROVE_OPTION) {
-        //     return "redirect:/quanLySanPham";
-        // }
-
-        // File fileToSave = fileChooser.getSelectedFile();
-        // String filePath = fileToSave.getAbsolutePath();
 
         try (Workbook workbook = new SXSSFWorkbook()){
             Sheet sheet = workbook.createSheet("SanPham");

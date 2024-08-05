@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/csstrangChu.css">
-<title>Trang chủ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/csstrangChu.css">
+    <title>Trang chủ</title>
 </head>
 
 <body>
-<nav th:replace="~{/menuFind.html}"></nav>
-<div class="container">
-    <div style="background-color: white; height: 330px; display: flex; justify-content: center; align-items: center;">
-        <img src="/image/banner/banner2.png">
-    </div>
-    
-    <ul class="menu2">
-        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP002|}">Cá nhân</a></li>
-        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP006|}">Cơ thể</a></li>
-        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP004|}">Da mặt</a></li>
-        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP001|}">Làm đẹp</a></li>
-        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP003|}">Tóc</a></li>
-        <li><a th:href="@{|/timSanPham?loaiSanPham=LSP005|}">Nước hoa</a></li>
-    </ul>
+    <nav th:replace="~{/menuFind.html}"></nav>
+    <div class="container">
+        <div
+            style="background-color: white; height: 330px; display: flex; justify-content: center; align-items: center;">
+            <img src="/image/banner/banner2.png">
+        </div>
 
-    <div style="margin-top: 30px;" class="container">
-        <div class="listProducts">
-            <p >Sản phẩm mới</p>
-            <div class="layoutProduct">
-                <div class="product" th:each="sanPhamMoi : ${listSanPhamMoi}">
-                    <a th:href="@{|/chiTietSanPham?maSanPham=${sanPhamMoi.MaSanPham}|}">
-                        <img th:src="@{|/image/sanpham/${sanPhamMoi.HinhAnh}|}">
-                        <div class="inforProduct">
-                            <p style="font-size: 15px;" th:text="${sanPhamMoi.TenSanPham}"></p>
-                            <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;" 
-                                th:text="${#numbers.formatDecimal(sanPhamMoi.getDonGia(), 0, 'POINT', 0, 'COMMA') + 'đ'}"></p>
-                            <!-- <p style="color: gray; font-size: 15px;"><del>2000000<span>đ</span></del></p> -->
-                        </div>                                                                                
+        <ul class="menu2">
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP002|}">Cá nhân</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP006|}">Cơ thể</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP004|}">Da mặt</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP001|}">Làm đẹp</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP003|}">Tóc</a></li>
+            <li><a th:href="@{|/timSanPham?loaiSanPham=LSP005|}">Nước hoa</a></li>
+        </ul>
+
+        <div style="margin-top: 30px;" class="container">
+            <div class="listProducts">
+                <p>Sản phẩm mới</p>
+                <div class="layoutProduct">
+                    <div class="product" th:each="sanPhamMoi : ${listSanPhamMoi}">
+                        <a th:href="@{|/chiTietSanPham?maSanPham=${sanPhamMoi.MaSanPham}|}">
+                            <img th:src="@{|/image/sanpham/${sanPhamMoi.HinhAnh}|}">
+                            <div class="inforProduct">
+                                <p style="font-size: 15px;" th:text="${sanPhamMoi.TenSanPham}"></p>
+                                <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;"
+                                    th:text="${#numbers.formatDecimal(sanPhamMoi.getDonGia(), 0, 'POINT', 0, 'COMMA') + 'đ'}">
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: center; width: 100%; margin-top: 20px;">
+                    <a href="/timSanPham">
+                        <button class="btnStyle2" style="height: 46px; width: 232px;">Xem thêm</button>
                     </a>
                 </div>
             </div>
-            <div style="display: flex; justify-content: center; width: 100%; margin-top: 20px;">
-                <a href="/timSanPham">
-                    <button class="btnStyle2" style="height: 46px; width: 232px;">Xem thêm</button>
-                </a>
+        </div>
+        <div class="bestSellLayout">
+            <p>Sản phẩm bán chạy</p>
+            <div class="listBestSell">
+                <div class="bestSellProduct" th:each="bestSell : ${listSanPhamBestSell}">
+                    <a th:href="@{|/chiTietSanPham?maSanPham=${bestSell.MaSanPham}|}">
+                        <img th:src="@{|/image/sanpham/${bestSell.HinhAnh}|}"
+                            alt="Ảnh sản phẩm">
+                        <div class="inforBestSellProduct">
+                            <p style="font-size: 15px;" th:text="${bestSell.TenSanPham}"></p>
+                            <p style="color: var(--color_main); font-weight: bold; font-size: 20px; margin-top: 5px;"
+                                th:text="${#numbers.formatDecimal(bestSell.getDonGia(), 0, 'POINT', 0, 'COMMA') + 'đ'}">
+                            </p>
+                        </div>
+                    </a>
+                </div>
             </div>
-
-        </div>  
+        </div>
     </div>
-</div>
-<footer>
-    <div>
-        
-    </div>
-</footer>
+    <footer th:replace="~{/footer.html}">
+    </footer>
 </body>
-<script>
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var isLogin =  /*[[${isLogin}]]*/"";
+    if (isLogin) {
+        alert('Đăng nhập thành công !');
+    }
+    /*]]>*/
 </script>
 
 </html>

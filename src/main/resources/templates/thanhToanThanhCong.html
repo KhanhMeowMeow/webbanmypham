@@ -8,9 +8,11 @@
     <title>Thông báo thanh toán</title>
 </head>
 <body>
-    <nav th:replace="/menuFind.html"></nav>
+    <nav th:replace="~{/menuFind.html}"></nav>
     <div class="container">
-        <h1 th:text="${messPayment}"></h1>
+        <div class="outLineMessage">
+            <p th:text="${messPayment}"></p>
+        </div>
     </div>
 </body>
 </html>

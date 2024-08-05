@@ -57,3 +57,38 @@
     margin: 0;
     padding: 0;
 }
+
+
+.bestSellLayout{
+    background-color: white;
+    width: 1200px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.bestSellLayout > p {
+    color: var(--color_main);
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.listBestSell {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+.listBestSell .bestSellProduct {
+    width: 200px;
+    padding: 12px;
+}
+.listBestSell > .bestSellProduct img{
+    width: 200px;
+    height: 200px;
+}
+.listBestSell > .bestSellProduct  .inforBestSellProduct{
+    margin-top: 10px;
+}
+.listBestSell > .bestSellProduct  .inforBestSellProduct p{
+    margin-bottom: 5px;
+}

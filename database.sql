@@ -161,12 +161,7 @@ INSERT INTO DonHangChiTiet VALUES
 ('DHCT029', 'DH005', 'SP018', 10, 10000000),
 ('DHCT030', 'DH006', 'SP019', 10, 10000000)
 
-
-SELECT Month(DonHang.NgayThang), SUM(DonHangChiTiet.TongGia) 
-from DonHang 
-INNER JOIN DonHangChiIet on DonHang.MaDonHang = DonHangChiTiet.DonHang 
-GROUP BY DonHang.NgayThang
-
-
-SELECT Month(NgayThang) as Month, SUM(TongTien)
-From DonHang GROUP BY Month(NgayThang)
+SELECT dhct.SanPham
+FROM DonHangChiTiet dhct 
+GROUP BY dhct.SanPham
+ORDER BY COUNT(dhct.SanPham) desc

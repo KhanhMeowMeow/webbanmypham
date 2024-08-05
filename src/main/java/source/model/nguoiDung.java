@@ -10,6 +10,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +28,7 @@ public class NguoiDung {
     @NotBlank(message = "Không được để trống mã người dùng")
     private String MaNguoiDung;
 
-    @NotBlank(message = "Không được để trống Tên người dùng")
+    @NotNull(message = "Không được để trống Tên người dùng")
     private String TenNguoiDung;
 
     @NotBlank(message = "Phải có mật khẩu mới đăng nhập được")
@@ -42,10 +44,10 @@ public class NguoiDung {
     @NotBlank(message = "Không được để trống Email")
     private String Email;
 
+    private boolean TrangThai;
     @OneToOne(mappedBy = "NguoiDung")
     private GioHang GioHang;
 
-    private boolean TrangThai;
 
     @OneToMany(mappedBy = "NguoiDung")
     private Set<DonHang> DonHangs;

@@ -163,7 +163,11 @@ public class GioHangController {
         double tongTien = 0;
         String diaChiGiao = "";
         LocalDate ngatThang = toDate();
-        
+        try {
+            String idSanPham = listSanPhamOther.get(0).getProductId();
+        } catch (Exception e) {
+            return "redirect:/gioHang";
+        }
         for (OtherSanPhamDTO otherSanPhamDTO : listSanPhamOther) {
             tongTien += sanPhamDAO.timSanPhamTheoMaSanPham(otherSanPhamDTO.getProductId()).getDonGia() * otherSanPhamDTO.getQuantity();
             GioHangDTO gioHangDTO = new GioHangDTO();

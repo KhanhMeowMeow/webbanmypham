@@ -25,25 +25,25 @@
                     <form action="/submitSignup" class="form" method="post">
                         <div class="moduleInput">
                             <label for="TenDangNhap">Tên đăng nhập</label>
-                            <input type="text" name="TenDangNhap" class="input">
+                            <input type="text" name="TenDangNhap" class="input" th:value="${tenDangNhap}">
                         </div>
                         <div class="moduleInput">
                             <label for="MatKhau">Mật khẩu</label>
-                            <input type="password" name="MatKhau" class="input">
+                            <input type="password" name="MatKhau" class="input" th:value="${matKhau}">
                         </div>
                         <div class="moduleInput">
                             <label for="MatKhau">Nhập lại mật khẩu</label>
-                            <input type="password" name="NhapLaiMatKhau" class="input">
+                            <input type="password" name="NhapLaiMatKhau" class="input" th:value="${laiMatKhau}">
                         </div>
                         <div class="moduleInput">
                             <label for="email">Email</label>
-                            <input type="email" name="Email" class="input">
+                            <input type="email" name="Email" class="input" th:value="${email}">
                         </div>
                         <div class="moduleInput">
                             <label for="soDienThoai">Số điện thoại</label>
-                            <input type="text" name="SoDienThoai" class="input">
+                            <input type="text" name="SoDienThoai" class="input" th:value="${soDienThoai}">
                             <div class="errorOutline">
-                                <p class="error"></p>
+                                <p class="error" th:text="${messSignup}"></p>
                             </div>
                         </div>
                         <div class="moduleInput" style="align-items: center; margin-top: 30px;">
@@ -54,9 +54,7 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div style="display: flex; justify-content: center;">
-        </div>
+    <footer th:replace="~{/footer.html}">
     </footer>
 </body>
 </html>

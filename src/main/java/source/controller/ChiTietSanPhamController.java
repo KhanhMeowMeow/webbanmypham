@@ -27,7 +27,7 @@ public class ChiTietSanPhamController {
         List<SanPham> sanPhamCungLoai = sanPhamDAO.timSanPhamCungLoai(sanPham.getLoaiSanPham());
 
         model.addAttribute("sanPham", sanPham);
-        model.addAttribute("listSanPhamBanCoTheThich", sanPhamCungLoai.size() >= 5 ? sanPhamCungLoai.subList(0, 5) : sanPhamCungLoai);
+        model.addAttribute("listSanPhamBanCoTheThich", sanPhamCungLoai.size() >= 10 ? sanPhamCungLoai.subList(0, 10) : sanPhamCungLoai);
         return "chiTietSanPham";
     }
     

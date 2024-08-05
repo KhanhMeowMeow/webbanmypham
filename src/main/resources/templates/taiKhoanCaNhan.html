@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/cssTaiKhoanCaNhan.css">
+    <title>Cài đặt tài khoản cá nhân</title>
+</head>
+
+<body>
+    <nav th:replace="~{menu.html}"></nav>
+    <div class="container">
+        <div class="layoutUpdateInfor" th:object="${nguoiDung}" method="post">
+            <form th:action="@{/taiKhoanCaNhan/capNhat}" th:object="${nguoiDung}" method="post">
+                <div class="containerModuleInput">
+                    <div>
+                        <div class="moduleInput">
+                            <label for="TenDangNhap">Tên đăng nhập</label>
+                            <input type="text" name="TenDangNhap" class="input"  th:value="${nguoiDung.MaNguoiDung}">
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="MatKhau">Mật khẩu</label>
+                            <input type="password" name="MatKhau" class="input"  th:value="${nguoiDung.MatKhau}">
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="TenNguoiDung">Tên người dùng</label> 
+                            <input type="text" name="TenNguoiDung" class="input" th:value="${nguoiDung.TenNguoiDung}">
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="moduleInput">
+                            <label for="SoDienThoai">Số điện thoại</label>
+                            <input type="text" name="SoDienThoai" class="input" th:value="${nguoiDung.SoDienThoai}">
+                            <div class="errorOutline">
+                                <p class="error" th:text="${messSodienThoai}"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="Email">Email</label>
+                            <input type="email" name="Email" class="input" th:value="${nguoiDung.Email}">
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div class="moduleInput">
+                            <label for="DiaChi">Địa chỉ</label>
+                            <input type="text" name="DiaChi" class="input" th:value="${nguoiDung.DiaChi}">
+                            <div class="errorOutline">
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttonUpdate">
+                    <div style="display: flex; justify-content: space-between; width: 210px;">
+                        <button class="btnStyle1">Cập nhật</button>
+                        <button type="button" class="btnStyle2">Đổi mật khẩu</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- <footer th:replace="~{footer.html}"></footer> -->
+</body>
+
+</html>

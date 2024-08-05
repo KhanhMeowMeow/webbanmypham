@@ -22,6 +22,10 @@ public class GioHangDAO {
     public GioHang taoGioHang(GioHang gioHang){
         return gioHangRepository.save(gioHang);
     }
+
+    public List<GioHang> timTatCaGioHang(){
+        return gioHangRepository.findAll();
+    }
     
 
     // public List<GioHang> timGioHangTheoNguoiDung(NguoiDung maNguoiDung){

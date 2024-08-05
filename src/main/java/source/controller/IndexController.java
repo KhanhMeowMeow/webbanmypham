@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import source.DAO.DonHangChiTietDAO;
 import source.DAO.DonHangDAO;
 import source.DAO.GioHangChiTietDAO;
+import source.DAO.GioHangDAO;
 import source.DAO.LoaiSanPhamDAO;
 import source.DAO.NguoiDungDAO;
 import source.DAO.SanPhamDAO;
@@ -27,10 +29,12 @@ import source.model.DonHang;
 import source.model.DonHangChiTiet;
 import source.model.GioHang;
 import source.model.GioHangChiTiet;
+import source.model.GioHangDTO;
 import source.model.LoaiSanPham;
 import source.model.NguoiDung;
 import source.model.SanPham;
 import source.until.TopageUntil;
+
 @Controller
 public class IndexController {
 
@@ -65,20 +69,84 @@ public class IndexController {
     }
 
     @ModelAttribute("listSanPhamMoi")
-    public List<SanPham> list8SanPhamMoi(){
+    public List<SanPham> list10SanPhamMoi() {
         List<SanPham> allSanPham = sanPhamDAO.timSanPhamMoi();
-        return allSanPham.size() > 8 ? allSanPham.subList(0, 10) : allSanPham;
+        return allSanPham.size() > 10 ? allSanPham.subList(0, 10) : allSanPham;
+    }
+
+    @ModelAttribute("listSanPhamBestSell")
+    public List<SanPham> list5BestSell() {
+        List<SanPham> listGioHangDTO = donHangChiTietDAO.timSanPhamBestSell();
+        // List<SanPham> listBestSell = new ArrayList<>();
+        // for (BestSellDTO gioHangDTO : listGioHangDTO) {
+        // listBestSell.add(gioHangDTO.getSanPham());
+        // }
+        return listGioHangDTO.size() > 5 ? listGioHangDTO.subList(0, 5) : listGioHangDTO;
     }
 
     @RequestMapping("/submitSignup")
-    public String submitSignup() {
-        return "signup";
+    public String submitSignup(
+            @RequestParam("TenDangNhap") String tenDangNhap,
+            @RequestParam("MatKhau") String matKhau,
+            @RequestParam("NhapLaiMatKhau") String laiMatKhau,
+            @RequestParam("Email") String email,
+            @RequestParam("SoDienThoai") String soDienThoai,
+            Model model) {
+
+        String messSignup = "";
+        List<NguoiDung> listNguoiDung = nguoiDungDAO.timTatCaNgoiDungHoatDong();
+        model.addAttribute("tenDangNhap", tenDangNhap);
+        model.addAttribute("matKhau", matKhau);
+        model.addAttribute("laiMatKhau", laiMatKhau);
+        model.addAttribute("email", email);
+        model.addAttribute("soDienThoai", soDienThoai);
+
+        if (tenDangNhap.equals("") || matKhau.equals("") || laiMatKhau.equals("") || email.equals("")
+                || soDienThoai.equals("")) {
+            messSignup = "Không được để trống thông tin !";
+            model.addAttribute("messSignup", messSignup);
+            return "signup";
+        }
+        for (NguoiDung nguoiDung : listNguoiDung) {
+            if (tenDangNhap.equals(nguoiDung.getMaNguoiDung())) {
+                messSignup = "Đã có người sử dụng tên đăng nhập này !";
+                model.addAttribute("messSignup", messSignup);
+                return "signup";
+            }
+        }
+        if (!matKhau.equals(laiMatKhau)) {
+            messSignup = "Xác nhận lại mật khẩu không trùng khớp !";
+            model.addAttribute("messSignup", messSignup);
+            return "signup";
+        }
+        try {
+            Integer soDienThoaiint = Integer.parseInt(soDienThoai);
+        } catch (Exception e) {
+            messSignup = "Số điện thoại không đúng định dạng !";
+            model.addAttribute("messSignup", messSignup);
+            return "signup";
+        }
+        if (soDienThoai.length() < 10 || soDienThoai.length() > 13) {
+            messSignup = "Số điện thoại không đúng định dạng !";
+            model.addAttribute("messSignup", messSignup);
+            return "signup";
+        }
+
+        if (messSignup.equals("")) {
+            NguoiDung nguoiDung = new NguoiDung(tenDangNhap, " ", matKhau, false, null, soDienThoai, email, true, null,
+                    null);
+            nguoiDungDAO.themNguoiDung(nguoiDung);
+            model.addAttribute("isSignup", true);
+        }
+        return "login";
     }
 
     @RequestMapping("/submitLogin")
-    public String submitLogin(@RequestParam("TenDangNhap") String idNguoiDung,
-                            @RequestParam("MatKhau") String matKhau, 
-                            Model model) {
+    public String submitLogin(
+            @RequestParam("TenDangNhap") String idNguoiDung,
+            @RequestParam("MatKhau") String matKhau,
+            Model model) {
+
         List<NguoiDung> nguoiDungs = nguoiDungDAO.timTatCaNgoiDungHoatDong();
         NguoiDung existingUser = null;
         for (NguoiDung nguoiDung : nguoiDungs) {
@@ -86,14 +154,14 @@ public class IndexController {
                 existingUser = nguoiDung;
             }
         }
-        if(existingUser == null){
+        if (existingUser == null) {
             model.addAttribute("messLogin", "Sai tên đăng nhập hoặc mật khẩu!");
             return "login";
-        }else if (existingUser.getMatKhau().equals(matKhau)) {
+        } else if (existingUser.getMatKhau().equals(matKhau)) {
             session.setAttribute("idUser", idNguoiDung);
             model.addAttribute("messLogin", "Đăng nhập thành công!");
             return "redirect:/";
-        }else{
+        } else {
             model.addAttribute("messLogin", "Sai tên đăng nhập hoặc mật khẩu!");
             return "login";
         }
@@ -104,18 +172,17 @@ public class IndexController {
         session.removeAttribute("idUser");
         return "login";
     }
-    
+
     @GetMapping("/timSanPham")
     public String getTimSanPham(@RequestParam(name = "textFind", defaultValue = "", required = false) String tenSanPham,
-                                @RequestParam(defaultValue = "", required = false) String loaiSanPham,
-                                Model model,
-                                @RequestParam(defaultValue = "", required = false) String rule,
-                                @RequestParam(defaultValue = "", required = false) String all,
-                                @RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "0", required = false) Double minPrice,
-                                @RequestParam(defaultValue = "0", required = false) Double maxPrice
-                                ){
-        model.addAttribute("messListSanPham",false);
+            @RequestParam(defaultValue = "", required = false) String loaiSanPham,
+            Model model,
+            @RequestParam(defaultValue = "", required = false) String rule,
+            @RequestParam(defaultValue = "", required = false) String all,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "0", required = false) Double minPrice,
+            @RequestParam(defaultValue = "0", required = false) Double maxPrice) {
+        model.addAttribute("messListSanPham", false);
         int pageSize = 12;
         List<SanPham> listSanPham = sanPhamDAO.timSanPhamOn();
         Iterator<SanPham> inIterator = listSanPham.iterator();
@@ -138,23 +205,23 @@ public class IndexController {
         }
 
         if (listSanPham.size() == 0) {
-            model.addAttribute("messListSanPham",true);
+            model.addAttribute("messListSanPham", true);
             listSanPham = sanPhamDAO.timSanPhamOn();
         }
 
         if (all.equals("all")) {
-            model.addAttribute("messListSanPham",false);
+            model.addAttribute("messListSanPham", false);
             listSanPham = sanPhamDAO.timSanPhamOn();
         }
         if (rule.equals("max")) {
-            Collections.sort(listSanPham, Comparator.comparingDouble(SanPham :: getDonGia).reversed());
+            Collections.sort(listSanPham, Comparator.comparingDouble(SanPham::getDonGia).reversed());
         } else if (rule.equals("min")) {
-            Collections.sort(listSanPham, Comparator.comparingDouble(SanPham :: getDonGia));
+            Collections.sort(listSanPham, Comparator.comparingDouble(SanPham::getDonGia));
         }
         List<SanPham> pageListSanPham = TopageUntil.paginateFake(listSanPham, page, pageSize);
         model.addAttribute("listSanPham", pageListSanPham);
-        model.addAttribute("listNumberPage", listNumber((int)Math.ceil((double) listSanPham.size() / pageSize)));
-        model.addAttribute("totalPage", (int)Math.ceil((double) listSanPham.size() / pageSize));
+        model.addAttribute("listNumberPage", listNumber((int) Math.ceil((double) listSanPham.size() / pageSize)));
+        model.addAttribute("totalPage", (int) Math.ceil((double) listSanPham.size() / pageSize));
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("formFind", tenSanPham);
@@ -163,7 +230,7 @@ public class IndexController {
         return "/danhMucSanPham";
     }
 
-    private List<Integer> listNumber(int totalPage){
+    private List<Integer> listNumber(int totalPage) {
         List<Integer> pageNumbers = new ArrayList<>();
         for (int i = 0; i < totalPage; i++) {
             pageNumbers.add(i);
@@ -173,10 +240,9 @@ public class IndexController {
 
     @GetMapping("/messPaymentVNPay")
     public String getMesstPaymentVNPay(
-        @RequestParam(name = "vnp_BankTranNo", defaultValue = "") String bankTranNo,
-        @RequestParam(name = "vnp_OrderInfo", defaultValue = "") String inforPayment,
-        Model model
-    ) {
+            @RequestParam(name = "vnp_BankTranNo", defaultValue = "") String bankTranNo,
+            @RequestParam(name = "vnp_OrderInfo", defaultValue = "") String inforPayment,
+            Model model) {
         Pattern pattern = Pattern.compile("DH\\d+");
         Matcher matcher = pattern.matcher(inforPayment);
         if (!matcher.find()) {
@@ -191,7 +257,7 @@ public class IndexController {
         String messPayment = "";
         String idDH = matcher.group();
         DonHang donHang = donHangDAO.timDonHangTheoID(idDH);
-        if (donHang ==  null) {
+        if (donHang == null) {
             model.addAttribute("messPayment", "Không tìm thấy thông tin thanh toán");
             return "thanhToanThanhCong";
         }
@@ -199,16 +265,18 @@ public class IndexController {
         List<GioHangChiTiet> listGioHangChiTiet = gioHangChiTietDAO.timGHCTByMaNguoiDung(maNguoiDung);
         if (!bankTranNo.equals("")) {
             messPayment = "Thanh toán thành công!";
-            donHang.setThanhToan(true); 
+            donHang.setThanhToan(true);
             donHangDAO.thenDonHang(donHang);
             for (GioHangChiTiet gioHangChiTiet : listGioHangChiTiet) {
                 for (DonHangChiTiet donHangChiTiet : listDonHangChiTiet) {
                     if (donHangChiTiet.getSanPham().getMaSanPham().equals(gioHangChiTiet.getSanPham().getMaSanPham())) {
                         gioHangChiTietDAO.xoaSanPhamTrongGioHang(gioHangChiTiet.getMaGioHangChiTiet());
+                        SanPham sanPham  = donHangChiTiet.getSanPham();
+                        sanPham.setSoLuong((int) (sanPham.getSoLuong() - donHangChiTiet.getSoLuong()));
+                        sanPhamDAO.themSanPham(sanPham);
                     }
                 }
             }
-
         } else {
             messPayment = "Thanh toán thất bại !";
         }
@@ -216,9 +284,3 @@ public class IndexController {
         return "thanhToanThanhCong";
     }
 }
-//localhost:8080/messPaymentVNPay?vnp_Amount=747300000&vnp_BankCode=VNPAY&vnp_CardType=QRCODE&vnp_OrderInfo=Thanh+toan+don+hang%3ADH813&vnp_PayDate=20240804161538&vnp_ResponseCode=24&vnp_TmnCode=JLO8XJOF&vnp_TransactionNo=0&vnp_TransactionStatus=02&vnp_TxnRef=DH813&vnp_SecureHash=61c97491bf82b3001b0ecd78ce1d83414b13dc6c28621736b6370cc75c63bc7d0f52b19faf18c274713afe43ca494ac7f3d02fc6b492f68ad5a2ab3072ab4dbc
-
-
-//localhost:8080/messPaymentVNPay?vnp_Amount=747300000&vnp_BankCode=NCB&vnp_BankTranNo=VNP14543958&vnp_CardType=ATM&vnp_OrderInfo=Thanh+toan+don+hang%3ADH507&vnp_PayDate=20240804163500&vnp_ResponseCode=00&vnp_TmnCode=JLO8XJOF&vnp_TransactionNo=14543958&vnp_TransactionStatus=00&vnp_TxnRef=DH507&vnp_SecureHash=3ad78f8cb09b78d58f65f165ea820991f432e495a1b71dbe5e924854257b00c6a920b24e9333fe90a17a5a423be73f088bb1660130a236090e3792fc32c3429c
-
-//localhost:8080/messPaymentVNPay?vnp_Amount=121000000&vnp_BankCode=NCB&vnp_BankTranNo=VNP14543976&vnp_CardType=ATM&vnp_OrderInfo=Thanh+toan+don+hang%3ADH808&vnp_PayDate=20240804165738&vnp_ResponseCode=00&vnp_TmnCode=JLO8XJOF&vnp_TransactionNo=14543976&vnp_TransactionStatus=00&vnp_TxnRef=DH808&vnp_SecureHash=42201e2fc97911da3be558663990b110e8b7156e6583fdb599145abd9867eac3bd17fab8274e94491d855220300f874b96d868c48eb11f2c4e94bd27d147599f

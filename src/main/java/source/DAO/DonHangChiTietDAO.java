@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import source.model.DonHang;
 import source.model.DonHangChiTiet;
+import source.model.GioHangDTO;
+import source.model.SanPham;
 import source.repository.DonHangChiTietRepository;
 
 @Service
@@ -26,4 +28,7 @@ public class DonHangChiTietDAO {
         return donHangChiTietRepository.findAll();
     }
 
+    public List<SanPham> timSanPhamBestSell(){
+        return donHangChiTietRepository.findBestSell();
+    }
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav th:replace="~{/menu.html}"></nav>
-    <div class="container">
+    <div class="container" style="min-height: 1000px;">
         <div>
             <p th:text="${messGioHang}" style="margin: 0; padding: 0; font-size: 40px; color: var(--color_main4);"></p>
         </div>
@@ -59,8 +59,7 @@
             </div>
         </div>
     </div>
-    <footer>
-
+    <footer th:replace="~{/footer.html}">
     </footer>
 </body>
 <script>

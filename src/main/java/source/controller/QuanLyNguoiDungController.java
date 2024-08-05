@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import source.DAO.GioHangDAO;
 import source.DAO.NguoiDungDAO;
+import source.model.GioHang;
 import source.model.NguoiDung;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +25,8 @@ public class QuanLyNguoiDungController {
 
     @Autowired
     private NguoiDungDAO nguoiDungDAO;
+    @Autowired
+    private GioHangDAO gioHangDAO;
 
     @GetMapping("/quanLyNguoiDung")
     public String getQuanLyNguoiDung(Model model) {

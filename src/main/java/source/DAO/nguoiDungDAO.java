@@ -21,11 +21,22 @@ public class NguoiDungDAO {
         nguoiDungRepository.save(nguoiDung);
 
         GioHang gioHang = new GioHang();
-        gioHang.setMaGioHang("GH_"+nguoiDung.getMaNguoiDung());
+        gioHang.setMaGioHang("GH"+ nguoiDung.getMaNguoiDung());
         gioHang.setNguoiDung(nguoiDung);
         gioHang.setSoLuongSanPham(0);
         gioHang.setTongTien(0);
         gioHangDAO.taoGioHang(gioHang);
+    }
+
+    public String newIDGioHang(List<GioHang> listGioHang) {
+        Random random = new Random();
+        String maGHTCT = "GH" + (random.nextInt(999 - 1 + 1) + 1);
+        for (GioHang gioHang : listGioHang) {
+            if (gioHang.getMaGioHang().equals(maGHTCT)) {
+                maGHTCT = "GH" + (random.nextInt(999 - 1 + 1) + 1);
+            }
+        }
+        return maGHTCT;
     }
 
     public NguoiDung timTheoMaNgoiDung(String object){
